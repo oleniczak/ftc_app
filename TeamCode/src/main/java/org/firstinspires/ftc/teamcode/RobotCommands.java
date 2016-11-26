@@ -164,7 +164,6 @@ public class RobotCommands extends LinearOpMode
         telemetry.update();
     }
 
-    @SuppressWarnings("unused")
     public void CalibrateGyro()
     {
         // start calibrating the gyro.
@@ -193,7 +192,6 @@ public class RobotCommands extends LinearOpMode
         robot.motorBackLeft.setPower(power);
     }
 
-    @SuppressWarnings("unused")
     public void DriveReverse(double power)
     {
         // No telemetry message since drive will not complete until sleep expires.
@@ -224,7 +222,6 @@ public class RobotCommands extends LinearOpMode
         // No telemetry message since drive will not complete until sleep expires.
     }
 
-    @SuppressWarnings("unused")
     public void TurnRight(double power)
     {
         // No telemetry message since drive will not complete until sleep expires.
@@ -261,7 +258,6 @@ public class RobotCommands extends LinearOpMode
         telemetry.update();
     }
 
-    @SuppressWarnings("unused")
     public void ReportBeaconColor()
     {
         telemetry.addData("ReportBeaconColor", "Beginning Beacon Sensing ...");
@@ -282,7 +278,6 @@ public class RobotCommands extends LinearOpMode
         telemetry.update();
     }
 
-    @SuppressWarnings("unused")
     public void FindBeacon()
     {
         /* ***** CODE HERE IS NOT APPLICABLE TO OUR ROBOT - COPIED IN AS AN EXAMPLE ONLY ***** */

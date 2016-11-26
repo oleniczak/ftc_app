@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 class Hardware {
 
-    HardwareMap hwMap = null;   //?
+    HardwareMap hwMap = null;   //? private
 
     DcMotor motorFrontLeft=null;
     DcMotor motorBackLeft=null;

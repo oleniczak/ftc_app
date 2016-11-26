@@ -36,7 +36,6 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-@SuppressWarnings("unused")
 @TeleOp(name="Iterative OpMode", group="Opmode")
 class TeleOpIterative extends OpMode
 {
