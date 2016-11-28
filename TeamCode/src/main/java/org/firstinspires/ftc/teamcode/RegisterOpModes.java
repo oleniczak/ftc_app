@@ -58,6 +58,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpModeRegistrar;
  * Then uncomment and copy the manager.register() call to register as many of your OpModes as you like.
  * You can even use it to temporarily register samples directly from the robotController/external/samples folder.
  */
+
 public class RegisterOpModes
 {
 

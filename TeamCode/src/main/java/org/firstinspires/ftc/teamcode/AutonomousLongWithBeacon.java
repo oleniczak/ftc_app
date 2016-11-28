@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
+
 @Autonomous(name="Long with Beacon", group="Red Autonomous")
 class AutonomousLongWithBeacon extends LinearOpMode //RobotCommands
 {

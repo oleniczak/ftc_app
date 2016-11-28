@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+
 public class RobotConfiguration extends LinearOpMode
 {
     Hardware robot   = new Hardware();
