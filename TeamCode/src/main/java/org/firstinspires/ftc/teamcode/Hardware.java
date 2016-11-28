@@ -7,9 +7,12 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-class Hardware {
+import com.qualcomm.robotcore.util.ElapsedTime;
+
+public class Hardware {
 
     HardwareMap hwMap = null;   //? private
+    private ElapsedTime runtime  = new ElapsedTime();
 
     DcMotor motorFrontLeft=null;
     DcMotor motorBackLeft=null;
@@ -30,17 +33,17 @@ class Hardware {
     ModernRoboticsI2cColorSensor sensorColor=null;
 
     /* Constructor */
-//    public Hardware()
-//    {
-//    }
+    //public Hardware()
+    //{
+    //}
 
     /* Initialize standard Hardware interfaces */
-    public void IdentifyHardware(HardwareMap ahwMap)
+    public void IdentifyHardware (HardwareMap ahwMap)
     {
         hwMap = ahwMap;
 
         /* ******************************************************/
-        // Define and Initialize Motors
+        // Define Motors
         /* ******************************************************/
          /* eg: Initialize the hardware variables. Note that the strings used here as parameters
          * to 'get' must correspond to the names assigned during the robot configuration
@@ -56,27 +59,8 @@ class Hardware {
         motorCollectLower = hwMap.dcMotor.get("collect");
         motorCollectUpper = hwMap.dcMotor.get("collect1");
 
-        // eg: Set the drive motor directions:
-        // Reverse the motor that runs backwards when connected directly to the battery
-        // leftMotor.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        //  rightMotor.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        motorFrontRight.setDirection(DcMotor.Direction.REVERSE);
-        motorBackRight.setDirection(DcMotor.Direction.REVERSE);
-        motorCollectLower.setDirection(DcMotor.Direction.REVERSE);
-
-        // Set motors with or without Encoder
-        motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        motorLaunch.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motorCollectLower.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        motorCollectUpper.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-
         /* ******************************************************/
-        // Define and Initialize Servos
+        // Define Servos
         /* ******************************************************/
         servoBallGate = hwMap.servo.get("gate");
         servoForkLeft = hwMap.servo.get("fork");
@@ -84,9 +68,31 @@ class Hardware {
         servoButtonArm = hwMap.servo.get("button");
 
         /* ******************************************************/
-        // Define and Initialize Sensors
+        // Define Sensors
         /* ******************************************************/
         sensorColor = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
         sensorGyro = (ModernRoboticsI2cGyro) hwMap.gyroSensor.get("gyro");
     }
+
+    public void waitForTick(long periodMs)
+    {
+        long  remaining = periodMs - (long)runtime.milliseconds();
+
+        // sleep for the remaining portion of the regular cycle period.
+        if (remaining > 0)
+        {
+            try
+            {
+                Thread.sleep(remaining);
+            }
+            catch (InterruptedException e)
+            {
+                Thread.currentThread().interrupt();
+            }
+        }
+
+        // Reset the cycle clock for the next pass.
+        runtime.reset();
+    }
+
 }
