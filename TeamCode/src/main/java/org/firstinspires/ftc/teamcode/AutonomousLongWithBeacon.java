@@ -36,6 +36,7 @@ class AutonomousLongWithBeacon extends LinearOpMode //RobotCommands
         configs.loadParameters();
 
         configs.InitializeHW();
+        cmds.InitializeServos();
 
         waitForStart();
 

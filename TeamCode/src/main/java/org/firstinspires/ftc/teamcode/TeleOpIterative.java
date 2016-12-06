@@ -72,6 +72,8 @@ public class TeleOpIterative extends OpMode
 
         configs.InitializeHW();
 
+        cmds.InitializeServos();
+
         telemetry.addData("Status", "TeleOp Initialization Complete!");
         telemetry.update();
     }
