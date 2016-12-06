@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-
 @Autonomous(name="Red/Blue Basic Long with Encoders", group="Red/Blue Autonomous")
 class AutonomousBasicLongWithDistance extends LinearOpMode //RobotCommands
 {
@@ -36,6 +35,7 @@ class AutonomousBasicLongWithDistance extends LinearOpMode //RobotCommands
         configs.loadParameters();
 
         configs.InitializeHW();
+        cmds.InitializeServos();
 
         waitForStart();
 

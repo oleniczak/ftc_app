@@ -38,6 +38,7 @@ class AutonomousBasicLongWithTime extends LinearOpMode
         configs.loadParameters();
 
         configs.InitializeHW();
+        cmds.InitializeServos();
 
         waitForStart();
 

@@ -18,7 +18,6 @@ import java.util.Properties;
 public class RobotConfiguration extends LinearOpMode
 {
     Hardware robot   = new Hardware();
-    RobotConfiguration configs = new RobotConfiguration();
     Properties properties = new Properties();
 
     //Defaults are being set within the configuration to ensure that if the configs fail to load,
@@ -160,22 +159,7 @@ public class RobotConfiguration extends LinearOpMode
         telemetry.addData("InitializeHW", "> Resetting Encoders Complete!");
         telemetry.update();
 
-        /* ******************************************************/
-        // Initialize Servos
-        /* ******************************************************/
-        telemetry.addData("InitializeHW","> Initializing Servo Positions...");
-        telemetry.update();
 
-        robot.servoBallGate.setPosition(configs.CLOSED_BALL_GATE_POS);
-        robot.servoForkLeft.setPosition(configs.CLOSED_FORK_SERVO_POS);
-        robot.servoForkRight.setPosition(configs.CLOSED_FORK_SERVO_POS);
-        robot.servoButtonArm.setPosition(configs.START_BUTTON_POS);
-
-        telemetry.addData("InitializeHW", "> > Ball gate position: " + robot.servoBallGate.getPosition());
-        telemetry.addData("InitializeHW", "> > Fork left position: " + robot.servoForkLeft.getPosition());
-        telemetry.addData("InitializeHW", "> > Fork right position: " + robot.servoForkRight.getPosition());
-        telemetry.addData("InitializeHW", "> > Button arm position: " + robot.servoButtonArm.getPosition());
-        telemetry.addData("InitializeHW","> Initializing Servo Positions Complete!");
         telemetry.update();
 
         /* ******************************************************/

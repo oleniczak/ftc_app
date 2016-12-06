@@ -5,20 +5,17 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 
-public class RobotCommands extends LinearOpMode
-{
-    Hardware robot   = new Hardware();
+public class RobotCommands extends LinearOpMode {
+    Hardware robot = new Hardware();
     RobotConfiguration configs = new RobotConfiguration();
     private ElapsedTime runtime = new ElapsedTime();
 
     //private Telemetry telemetry;
 
-    public void runOpMode()
-    {
+    public void runOpMode() {
     }
 
-    public void DriveForward(double power)
-    {
+    public void DriveForward(double power) {
         // No telemetry message since drive will not complete until sleep expires.
         robot.motorFrontRight.setPower(power);
         robot.motorFrontLeft.setPower(power);
@@ -26,14 +23,12 @@ public class RobotCommands extends LinearOpMode
         robot.motorBackLeft.setPower(power);
     }
 
-    public void DriveReverse(double power)
-    {
+    public void DriveReverse(double power) {
         // No telemetry message since drive will not complete until sleep expires.
         DriveForward(-power);
     }
 
-    public void StopDriving()
-    {
+    public void StopDriving() {
         telemetry.addData("StopDriving", "Halting ...");
         telemetry.update();
 
@@ -43,8 +38,7 @@ public class RobotCommands extends LinearOpMode
         telemetry.update();
     }
 
-    public void TurnLeft(double power)
-    {
+    public void TurnLeft(double power) {
         // No telemetry message since drive will not complete until sleep expires.
         robot.motorFrontRight.setPower(power);
         robot.motorFrontLeft.setPower(-power);
@@ -52,8 +46,7 @@ public class RobotCommands extends LinearOpMode
         robot.motorBackLeft.setPower(-power);
     }
 
-    public void TurnRight(double power)
-    {
+    public void TurnRight(double power) {
         // No telemetry message since drive will not complete until sleep expires.
         TurnLeft(-power);
     }
@@ -69,9 +62,8 @@ public class RobotCommands extends LinearOpMode
         //  sleep will not work in OpMode
         //  sleep(configs.BALL_GATE_OPEN_TIME);
         runtime.reset();
-        while (runtime.seconds() < configs.BALL_GATE_OPEN_TIME)
-        {
-            telemetry.addData("DropNewBall","> Wait for ball drop:  %2.5f S Elapsed", runtime.seconds());
+        while (runtime.seconds() < configs.BALL_GATE_OPEN_TIME) {
+            telemetry.addData("DropNewBall", "> Wait for ball drop:  %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
 
@@ -93,9 +85,8 @@ public class RobotCommands extends LinearOpMode
         //  sleep will not work in OpMode
         //  sleep(configs.LAUNCH_TIME);
         runtime.reset();
-        while (runtime.seconds() < configs.LAUNCH_TIME)
-        {
-            telemetry.addData("LaunchBallAndReset","> Wait for one turn of launch motor:  %2.5f S Elapsed", runtime.seconds());
+        while (runtime.seconds() < configs.LAUNCH_TIME) {
+            telemetry.addData("LaunchBallAndReset", "> Wait for one turn of launch motor:  %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
 
@@ -107,24 +98,23 @@ public class RobotCommands extends LinearOpMode
 
     public void EncoderDrive(double speed,
                              double leftInches, double rightInches,
-                             double timeoutS)
-    {
+                             double timeoutS) {
         int newLeftFrontTarget;
         int newRightFrontTarget;
         int newLeftBackTarget;
         int newRightBackTarget;
 
-        telemetry.addData("EncoderDrive","EncoderDrive Starting...");
+        telemetry.addData("EncoderDrive", "EncoderDrive Starting...");
         telemetry.update();
 
         // Ensure that the opmode is still active
         if (opModeIsActive()) {
 
             // Calculate new target position
-            newLeftFrontTarget = robot.motorFrontLeft.getCurrentPosition() + (int)(leftInches * configs.COUNTS_PER_INCH);
-            newRightFrontTarget = robot.motorFrontRight.getCurrentPosition() + (int)(rightInches * configs.COUNTS_PER_INCH);
-            newLeftBackTarget = robot.motorBackLeft.getCurrentPosition() + (int)(leftInches * configs.COUNTS_PER_INCH);
-            newRightBackTarget = robot.motorBackRight.getCurrentPosition() + (int)(rightInches * configs.COUNTS_PER_INCH);
+            newLeftFrontTarget = robot.motorFrontLeft.getCurrentPosition() + (int) (leftInches * configs.COUNTS_PER_INCH);
+            newRightFrontTarget = robot.motorFrontRight.getCurrentPosition() + (int) (rightInches * configs.COUNTS_PER_INCH);
+            newLeftBackTarget = robot.motorBackLeft.getCurrentPosition() + (int) (leftInches * configs.COUNTS_PER_INCH);
+            newRightBackTarget = robot.motorBackRight.getCurrentPosition() + (int) (rightInches * configs.COUNTS_PER_INCH);
 
             // Pass target position to motor controller
             robot.motorFrontLeft.setTargetPosition(newLeftFrontTarget);
@@ -152,16 +142,15 @@ public class RobotCommands extends LinearOpMode
                     robot.motorFrontRight.isBusy() &&
                     robot.motorBackLeft.isBusy() &&
                     robot.motorBackRight.isBusy()
-                    )
-            {
+                    ) {
                 // Display it for the driver.
-                telemetry.addData("EncoderDrive","> Currently at %7d :%7d :%7d :&7d",
+                telemetry.addData("EncoderDrive", "> Currently at %7d :%7d :%7d :&7d",
                         robot.motorFrontLeft.getCurrentPosition(),
                         robot.motorFrontRight.getCurrentPosition(),
                         robot.motorBackLeft.getCurrentPosition(),
                         robot.motorBackRight.getCurrentPosition());
-                telemetry.addData("EncoderDrive","> Destination of %7d :%7d :%7d :&7d",
-                        newLeftFrontTarget,  newRightFrontTarget, newLeftBackTarget, newRightBackTarget);
+                telemetry.addData("EncoderDrive", "> Destination of %7d :%7d :%7d :&7d",
+                        newLeftFrontTarget, newRightFrontTarget, newLeftBackTarget, newRightBackTarget);
                 telemetry.update();
             }
 
@@ -176,12 +165,11 @@ public class RobotCommands extends LinearOpMode
 
             //  sleep(250);   // optional pause after each move
         }
-        telemetry.addData("EncoderDrive","EncoderDrive Complete!");
+        telemetry.addData("EncoderDrive", "EncoderDrive Complete!");
         telemetry.update();
     }
 
-    public void CalibrateGyro()
-    {
+    public void CalibrateGyro() {
         // start calibrating the gyro.
         telemetry.addData("CalibrateGyro", "Calibrating Gyro. Do Not move!");
         telemetry.update();
@@ -189,8 +177,7 @@ public class RobotCommands extends LinearOpMode
         robot.sensorGyro.calibrate();
 
         // make sure the gyro is calibrated.
-        while (!isStopRequested() && robot.sensorGyro.isCalibrating())
-        {
+        while (!isStopRequested() && robot.sensorGyro.isCalibrating()) {
             sleep(50);
             idle();
         }
@@ -200,8 +187,7 @@ public class RobotCommands extends LinearOpMode
     }
 
 
-    public void SenseBeacon(String Alliance)
-    {
+    public void SenseBeacon(String Alliance) {
         telemetry.addData("SenseBeacon", "Beginning Beacon Sensing ...");
         telemetry.update();
 
@@ -211,34 +197,30 @@ public class RobotCommands extends LinearOpMode
         robot.sensorColor.alpha();
         robot.sensorColor.argb();
 
-        telemetry.addData("SenseBeacon","> Red: " + robot.sensorColor.red());
-        telemetry.addData("SenseBeacon","> Green: " + robot.sensorColor.green());
-        telemetry.addData("SenseBeacon","> Blue: " + robot.sensorColor.blue());
-        telemetry.addData("SenseBeacon","> Clear: " + robot.sensorColor.alpha());
-        telemetry.addData("SenseBeacon","> Clear: " + robot.sensorColor.argb());
+        telemetry.addData("SenseBeacon", "> Red: " + robot.sensorColor.red());
+        telemetry.addData("SenseBeacon", "> Green: " + robot.sensorColor.green());
+        telemetry.addData("SenseBeacon", "> Blue: " + robot.sensorColor.blue());
+        telemetry.addData("SenseBeacon", "> Clear: " + robot.sensorColor.alpha());
+        telemetry.addData("SenseBeacon", "> Clear: " + robot.sensorColor.argb());
         telemetry.update();
 
         robot.sensorColor.enableLed(false);
 
-        while (robot.sensorColor.alpha() < 20)
-        {
-            if ((robot.sensorColor.red() >= 8) && (Alliance.equals("Red")))
-            {
+        while (robot.sensorColor.alpha() < 20) {
+            if ((robot.sensorColor.red() >= 8) && (Alliance.equals("Red"))) {
                 // Red beacon found
                 // Take Red action
-                telemetry.addData("SenseBeacon","> > Red Found :" + robot.sensorColor.red());
+                telemetry.addData("SenseBeacon", "> > Red Found :" + robot.sensorColor.red());
                 telemetry.update();
                 // Drive forward 3 inches with the sensor arm extended
-                EncoderDrive(configs.APPROACH_SPEED,3,3,1.0);
-            }
-            else if ((robot.sensorColor.blue()<=3) && (Alliance.equals("Blue")))
-            {
+                EncoderDrive(configs.APPROACH_SPEED, 3, 3, 1.0);
+            } else if ((robot.sensorColor.blue() <= 3) && (Alliance.equals("Blue"))) {
                 // Blue beacon found
                 //Take Blue action
-                telemetry.addData("SenseBeacon","> > Blue Found: " +robot.sensorColor.blue());
+                telemetry.addData("SenseBeacon", "> > Blue Found: " + robot.sensorColor.blue());
                 telemetry.update();
                 // Dive forward 3 inches with the sensor arm extended
-                EncoderDrive(configs.APPROACH_SPEED,3,3,1.0);
+                EncoderDrive(configs.APPROACH_SPEED, 3, 3, 1.0);
             }
 //            else
 //            {
@@ -256,8 +238,7 @@ public class RobotCommands extends LinearOpMode
         telemetry.update();
     }
 
-    public void ReadyBeaconArm()
-    {
+    public void ReadyBeaconArm() {
         telemetry.addData("ReadyBeaconArm", "Readying Beacon Arm ...");
         telemetry.update();
 
@@ -268,15 +249,31 @@ public class RobotCommands extends LinearOpMode
         telemetry.update();
     }
 
-    public void DiarmBeaconArm()
-    {
-        telemetry.addData("DiarmBeaconArm", "Disarming Beacon Arm ...");
+    public void DisArmBeacon() {
+        telemetry.addData("DisArmBeacon", "Disarming Beacon Arm ...");
         telemetry.update();
 
         robot.servoButtonArm.setPosition(configs.START_BUTTON_POS);
         robot.sensorColor.enableLed(true);
 
-        telemetry.addData("DiarmBeaconArm", "Disarming Beacon Arm Complete!");
+        telemetry.addData("DisArmBeacon", "Disarming Beacon Arm Complete!");
         telemetry.update();
+    }
+
+    public void InitializeServos()
+    {
+        telemetry.addData("InitializeHW", "> Initializing Servo Positions...");
+        telemetry.update();
+
+        robot.servoBallGate.setPosition(configs.CLOSED_BALL_GATE_POS);
+        robot.servoForkLeft.setPosition(configs.CLOSED_FORK_SERVO_POS);
+        robot.servoForkRight.setPosition(configs.CLOSED_FORK_SERVO_POS);
+        robot.servoButtonArm.setPosition(configs.START_BUTTON_POS);
+
+        telemetry.addData("InitializeHW", "> > Ball gate position: " + robot.servoBallGate.getPosition());
+        telemetry.addData("InitializeHW", "> > Fork left position: " + robot.servoForkLeft.getPosition());
+        telemetry.addData("InitializeHW", "> > Fork right position: " + robot.servoForkRight.getPosition());
+        telemetry.addData("InitializeHW", "> > Button arm position: " + robot.servoButtonArm.getPosition());
+        telemetry.addData("InitializeHW", "> Initializing Servo Positions Complete!");
     }
 }
