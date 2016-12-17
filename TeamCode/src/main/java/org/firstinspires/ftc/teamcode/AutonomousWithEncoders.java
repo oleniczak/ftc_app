@@ -9,9 +9,9 @@ FUNCTION:
     Autonomous
 */
 
-@Autonomous(name="w/ Encoders, config Alliance & Position", group="Autonomous")
+@Autonomous(name="Encoder Drive (Config Alliance & Position)", group="Autonomous")
 //@Disabled
-class AutonomousWithDistance extends LinearOpMode
+class AutonomousWithEncoders extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
     private RobotConfiguration configs = new RobotConfiguration(telemetry);

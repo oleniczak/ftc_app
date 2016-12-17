@@ -9,8 +9,8 @@ FUNCTION:
     Autonomous
 */
 
-@Autonomous(name="w/ Beacon, config Alliance & Position", group="Autonomous")
-@Disabled
+@Autonomous(name="Beacon w/ Encoders (Config Alliance & Position)", group="Autonomous")
+//@Disabled
 class AutonomousWithBeacon extends LinearOpMode //RobotCommands
 {
     private Hardware robot = new Hardware(telemetry);

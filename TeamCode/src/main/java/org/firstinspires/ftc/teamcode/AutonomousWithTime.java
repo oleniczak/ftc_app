@@ -11,7 +11,7 @@ FUNCTION:
     Autonomous
 */
 
-@Autonomous(name="No Encoders, config Alliance & Position", group="Autonomous")
+@Autonomous(name="Basic (Config Alliance & Position)", group="Autonomous")
 //@Disabled
 class AutonomousWithTime extends LinearOpMode
 {
