@@ -1,0 +1,41 @@
+ALLIANCE = RED
+START_POSITION = LONG
+DRIVE_POWER = 0.6
+TURN_POWER = 0.5
+LAUNCH_POWER = 1.0
+APPROACH_SPEED = 0.25
+CLOSED_BALL_GATE_POS = 0.7
+OPEN_BALL_GATE_POS = 0.0
+CLOSED_FORK_SERVO_POS = 1.0
+OPEN_FORK_SERVO_POS = 0.4
+START_BUTTON_POS = 1.0
+DETECTION_BUTTON_POS = 0.6
+BALL_GATE_OPEN_TIME = 2000
+LAUNCH_TIME = 1000
+LONG_AUTO_DRIVE_TIME = 3000
+SHORT_AUTO_DRIVE_TIME = 1500
+AUTO_DELAY_TIME = 10000
+COUNTS_PER_MOTOR_REV    = 1120
+DRIVE_GEAR_REDUCTION    = 0.3
+WHEEL_DIAMETER_INCHES   = 4.0
+
+#ALLIANCE:              RED or BLUE
+#START_POSITION:        LONG or SHORT
+#DRIVE_POWER:           Motor-power:  Drive speed
+#TURN_POWER:            Motor-power:  Turn power
+#LAUNCH_POWER:          Motor-power:  Ball launch power
+#APPROACH_SPEED:        Motor-power:  Tank power to approach beacon
+#CLOSED_BALL_GATE_POS:  Servo:  Ball gate closed position
+#OPEN_BALL_GATE_POS:    Servo:  Ball gate open position
+#CLOSED_FORK_SERVO_POS: Servo:  Fork closed position
+#OPEN_FORK_SERVO_POS:   Servo:  Fork open position
+#START_BUTTON_POS:      Servo:  Sensor arm start position
+#DETECTION_BUTTON_POS:  Servo:  Sensor arm ready to detect position
+#BALL_GATE_OPEN_TIME:   Motor-time:  Time to run motor to open ball gate
+#LAUNCH_TIME:           Motor-time:  Time to run motor to launch ball
+#LONG_AUTO_DRIVE_TIME:  Motor-time:  Time to run motor from long position to center park
+#SHORT_AUTO_DRIVE_TIME: Motor-time:  Time to run motor from short position to center park
+#AUTO_DELAY_TIME:       Motor-time:  Time to delay in autonomous to prevent penalty if crossing line
+#COUNTS_PER_MOTOR_REV:  Specs:
+#DRIVE_GEAR_REDUCTION:  Specs:
+#WHEEL_DIAMETER_INCHES: Specs:  Wheel diameter

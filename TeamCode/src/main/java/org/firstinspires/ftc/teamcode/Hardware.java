@@ -2,18 +2,22 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
-
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+//import com.qualcomm.robotcore.util.ElapsedTime;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-import com.qualcomm.robotcore.util.ElapsedTime;
+/*
+PURPOSE:
+    Identifies hardware components
+*/
 
-
-public class Hardware {
-
-    HardwareMap hwMap = null;   //? private
-    private ElapsedTime runtime  = new ElapsedTime();
+public class Hardware
+{
+    //private ElapsedTime runtime  = new ElapsedTime();
+    private Telemetry telemetry;
+    private HardwareMap hwMap = null;
 
     DcMotor motorFrontLeft=null;
     DcMotor motorBackLeft=null;
@@ -34,13 +38,17 @@ public class Hardware {
     ModernRoboticsI2cColorSensor sensorColor=null;
 
     /* Constructor */
-    //public Hardware()
-    //{
-    //}
+    public Hardware(Telemetry telemetry)
+    {
+        this.telemetry = telemetry;
+    }
 
     /* Initialize standard Hardware interfaces */
-    public void IdentifyHardware (HardwareMap ahwMap)
+    public void init(HardwareMap ahwMap)
     {
+        telemetry.addData("Hardware", "Begin Hardware Definition...");
+        telemetry.update();
+
         hwMap = ahwMap;
 
         /* ******************************************************/
@@ -73,27 +81,26 @@ public class Hardware {
         /* ******************************************************/
         sensorColor = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
         sensorGyro = (ModernRoboticsI2cGyro) hwMap.gyroSensor.get("gyro");
+/*
+        //Set Starting values
+
+        motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //idle();
+
+        motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        servoBallGate.setPosition(RobotConfiguration.CLOSED_BALL_GATE_POS);
+        servoForkLeft.setPosition(RobotConfiguration.CLOSED_FORK_SERVO_POS);
+        servoForkRight.setPosition(RobotConfiguration.CLOSED_FORK_SERVO_POS);
+        servoButtonArm.setPosition(RobotConfiguration.START_BUTTON_POS);
+*/
+        telemetry.addData("Hardware", "Hardware Definition Complete!");
+        telemetry.update();
     }
-
-    public void waitForTick(long periodMs)
-    {
-        long  remaining = periodMs - (long)runtime.milliseconds();
-
-        // sleep for the remaining portion of the regular cycle period.
-        if (remaining > 0)
-        {
-            try
-            {
-                Thread.sleep(remaining);
-            }
-            catch (InterruptedException e)
-            {
-                Thread.currentThread().interrupt();
-            }
-        }
-
-        // Reset the cycle clock for the next pass.
-        runtime.reset();
-    }
-
 }
