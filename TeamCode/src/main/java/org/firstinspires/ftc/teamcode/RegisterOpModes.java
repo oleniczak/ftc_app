@@ -80,9 +80,9 @@ public class RegisterOpModes
     // manager.register("Auto Drive Line",        PushbotAutoDriveToLine_Linear.class);
     // manager.register("K9 Telop",               K9botTeleopTank_Linear.class);
 
-    //manager.register("AutonomousBasicLongWithDistance",AutonomousBasicLongWithDistance.class);
-    //manager.register("AutonomousBasicLongWithTime",AutonomousBasicLongWithTime.class);
-    //manager.register("AutonomousLongWithBeacon",AutonomousLongWithBeacon.class);
+    //manager.register("AutonomousWithDistance",AutonomousWithDistance.class);
+    //manager.register("AutonomousWithTime",AutonomousWithTime.class);
+    //manager.register("AutonomousWithBeacon",AutonomousWithBeacon.class);
     //manager.register("TeleOpIterative",TeleOpIterative.class);
     //manager.register("RobotCommands",RobotCommands.class);
     //manager.register("RobotConfiguration",RobotConfiguration.class);
