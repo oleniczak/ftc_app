@@ -48,6 +48,9 @@ public class RobotConfiguration
     private static double DRIVE_GEAR_REDUCTION = 0.3;
     private static double WHEEL_DIAMETER_INCHES = 4.0;
     public static double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.141592652589);
+    public static double NINETY_DEGREE_TURN_INCHES = 9.0;
+    public static double LONG_AUTO_DRIVE_INCHES = 48;
+    public static double SHORT_AUTO_DRIVE_INCHES = 36;
 
     /* Constructor */
     public RobotConfiguration(Telemetry telemetry)
@@ -94,6 +97,9 @@ public class RobotConfiguration
             DRIVE_GEAR_REDUCTION = Double.parseDouble(properties.getProperty("DRIVE_GEAR_REDUCTION"));
             WHEEL_DIAMETER_INCHES = Double.parseDouble(properties.getProperty("WHEEL_DIAMETER_INCHES"));
             COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.141592652589);
+            NINETY_DEGREE_TURN_INCHES = Integer.parseInt(properties.getProperty("NINETY_DEGREE_TURN_INCHES"));
+            LONG_AUTO_DRIVE_INCHES = Integer.parseInt(properties.getProperty("LONG_AUTO_DRIVE_INCHES"));
+            SHORT_AUTO_DRIVE_INCHES = Integer.parseInt(properties.getProperty("SHORT_AUTO_DRIVE_INCHES"));
 
             ALLIANCE = properties.getProperty("ALLIANCE");
             START_POSITION = properties.getProperty("START_POSITION");

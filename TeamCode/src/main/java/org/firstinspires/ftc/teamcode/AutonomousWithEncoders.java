@@ -69,21 +69,21 @@ class AutonomousWithEncoders extends LinearOpMode
         //Turn to face center
         if(RobotConfiguration.ALLIANCE.equals("RED"))
         {
-            cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER, 9, -9, 1.0); //90 degree right turn
+            cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER, RobotConfiguration.NINETY_DEGREE_TURN_INCHES, -RobotConfiguration.NINETY_DEGREE_TURN_INCHES, 3.0); //90 degree right turn
         }
         else    //BLUE
         {
-            cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER,-9, 9, 1.0);  //90 degree left turn
+            cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER, -RobotConfiguration.NINETY_DEGREE_TURN_INCHES, RobotConfiguration.NINETY_DEGREE_TURN_INCHES, 3.0);  //90 degree left turn
         }
 
         //Drive to center
         if (RobotConfiguration.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER,  48,  48, 3.0);  //Forward 48 Inches with 3 Sec timeout
+            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER,  RobotConfiguration.LONG_AUTO_DRIVE_INCHES,  RobotConfiguration.LONG_AUTO_DRIVE_INCHES, 3.0);
         }
         else //SHORT
         {
-            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER,  36,  36, 3.0);  //Forward 36 Inches with 3 Sec timeout
+            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER,  RobotConfiguration.SHORT_AUTO_DRIVE_INCHES,  RobotConfiguration.SHORT_AUTO_DRIVE_INCHES, 3.0);
         }
 
         cmds.StopDriving(robot);
