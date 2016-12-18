@@ -42,12 +42,13 @@ class AutonomousWithBeacon extends LinearOpMode //RobotCommands
         //  EncoderDrive(robot, DRIVE_POWER, <speed>, <leftinches>, <rightinches>, <timeS>);
         //  StopDriving(robot);
         //  TurnLeft(robot, TURN_POWER, turntime);
-        //  TurnRight(robot, TURN_POWER, turntime)/
+        //  TurnRight(robot, TURN_POWER, turntime);
         //  LaunchBallAndReset(robot, LAUNCH_POWER);
         //  DropNewBall(robot);
+        //  ReadyBeaconArm (robot);
+        //  DisarmBeaconArm (robot);
+        //  SenseBeacon (robot);
         //  CalibrateGyro(robot);
-        //  FindBeacon(robot);
-        //  ReportBeaconColor(robot);
         //***********************************************************************************
 
         cmds.LaunchBallAndReset(robot, RobotConfiguration.LAUNCH_POWER);

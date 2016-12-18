@@ -42,12 +42,13 @@ class AutonomousWithEncoders extends LinearOpMode
         //  EncoderDrive(robot, DRIVE_POWER, <speed>, <leftinches>, <rightinches>, <timeS>);
         //  StopDriving(robot);
         //  TurnLeft(robot, TURN_POWER, turntime);
-        //  TurnRight(robot, TURN_POWER, turntime)/
+        //  TurnRight(robot, TURN_POWER, turntime);
         //  LaunchBallAndReset(robot, LAUNCH_POWER);
         //  DropNewBall(robot);
+        //  ReadyBeaconArm (robot);
+        //  DisarmBeaconArm (robot);
+        //  SenseBeacon (robot);
         //  CalibrateGyro(robot);
-        //  FindBeacon(robot);
-        //  ReportBeaconColor(robot);
         //***********************************************************************************
 
         cmds.LaunchBallAndReset(robot, RobotConfiguration.LAUNCH_POWER);
@@ -69,12 +70,12 @@ class AutonomousWithEncoders extends LinearOpMode
         if(RobotConfiguration.ALLIANCE.equals("RED"))
         {
             //cmds.TurnRight(robot,RobotConfiguration.TURN_POWER,100);
-            cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER, 6, -6, 1.0); //90 degree right turn
+            cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER, 9, -9, 1.0); //90 degree right turn
         }
         else
         {
             //cmds.TurnLeft(robot,RobotConfiguration.TURN_POWER,100);
-            cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER,-6, 6, 1.0);  //90 degree left turn
+            cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER,-9, 9, 1.0);  //90 degree left turn
         }
 
         //Drive to center

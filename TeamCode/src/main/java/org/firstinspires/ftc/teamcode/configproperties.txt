@@ -14,10 +14,11 @@ BALL_GATE_OPEN_TIME = 2000
 LAUNCH_TIME = 1000
 LONG_AUTO_DRIVE_TIME = 3000
 SHORT_AUTO_DRIVE_TIME = 1500
+NINETY_DEGREE_TURN_TIME = 100
 AUTO_DELAY_TIME = 10000
-COUNTS_PER_MOTOR_REV    = 1120
-DRIVE_GEAR_REDUCTION    = 0.3
-WHEEL_DIAMETER_INCHES   = 4.0
+COUNTS_PER_MOTOR_REV = 1120
+DRIVE_GEAR_REDUCTION = 0.3
+WHEEL_DIAMETER_INCHES = 4.0
 
 #ALLIANCE:              RED or BLUE
 #START_POSITION:        LONG or SHORT
@@ -35,6 +36,7 @@ WHEEL_DIAMETER_INCHES   = 4.0
 #LAUNCH_TIME:           Motor-time:  Time to run motor to launch ball
 #LONG_AUTO_DRIVE_TIME:  Motor-time:  Time to run motor from long position to center park
 #SHORT_AUTO_DRIVE_TIME: Motor-time:  Time to run motor from short position to center park
+#NINETY_DEGREE_TURN_TIME:  Motor-time: Time to run motor for 90 degree Autonomous turn
 #AUTO_DELAY_TIME:       Motor-time:  Time to delay in autonomous to prevent penalty if crossing line
 #COUNTS_PER_MOTOR_REV:  Specs:
 #DRIVE_GEAR_REDUCTION:  Specs:

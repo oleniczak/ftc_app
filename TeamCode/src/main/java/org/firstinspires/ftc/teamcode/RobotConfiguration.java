@@ -42,6 +42,7 @@ public class RobotConfiguration
     public static int LAUNCH_TIME = 1000;
     public static int LONG_AUTO_DRIVE_TIME = 3000;
     public static int SHORT_AUTO_DRIVE_TIME = 1500;
+    public static int NINETY_DEGREE_TURN_TIME = 100;
     public static int AUTO_DELAY_TIME = 10000;
 
     private static double COUNTS_PER_MOTOR_REV = 1120;
@@ -87,6 +88,7 @@ public class RobotConfiguration
             LAUNCH_TIME = Integer.parseInt(properties.getProperty("LAUNCH_TIME"));
             LONG_AUTO_DRIVE_TIME = Integer.parseInt(properties.getProperty("LONG_AUTO_DRIVE_TIME"));
             SHORT_AUTO_DRIVE_TIME = Integer.parseInt(properties.getProperty("SHORT_AUTO_DRIVE_TIME"));
+            NINETY_DEGREE_TURN_TIME = Integer.parseInt(properties.getProperty("NINETY_DEGREE_TURN_TIME"));
             AUTO_DELAY_TIME = Integer.parseInt(properties.getProperty("AUTO_DELAY_TIME"));
 
             COUNTS_PER_MOTOR_REV = Double.parseDouble(properties.getProperty("COUNTS_PER_MOTOR_REV"));
