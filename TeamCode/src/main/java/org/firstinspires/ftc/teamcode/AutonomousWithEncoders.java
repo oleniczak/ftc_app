@@ -36,19 +36,19 @@ class AutonomousWithEncoders extends LinearOpMode
         waitForStart();
 
         //***********************************************************************************
-        /* Available commands: (preface each w/ cmds.)*/
-        //  DriveForward(robot, DRIVE_POWER, drivetime)/
-        //  DriveReverse(robot, DRIVE_POWER, drivetime);
-        //  EncoderDrive(robot, DRIVE_POWER, <speed>, <leftinches>, <rightinches>, <timeS>);
-        //  StopDriving(robot);
-        //  TurnLeft(robot, TURN_POWER, turntime);
-        //  TurnRight(robot, TURN_POWER, turntime);
-        //  LaunchBallAndReset(robot, LAUNCH_POWER);
-        //  DropNewBall(robot);
-        //  ReadyBeaconArm (robot);
-        //  DisarmBeaconArm (robot);
-        //  SenseBeacon (robot);
-        //  CalibrateGyro(robot);
+        //  Available commands:
+        //      DriveForward(robot, DRIVE_POWER, drivetime)/
+        //      DriveReverse(robot, DRIVE_POWER, drivetime);
+        //      EncoderDrive(robot, DRIVE_POWER, <speed>, <leftinches>, <rightinches>, <timeS>);
+        //      StopDriving(robot);
+        //      TurnLeft(robot, TURN_POWER, turntime);
+        //      TurnRight(robot, TURN_POWER, turntime);
+        //      LaunchBallAndReset(robot, LAUNCH_POWER);
+        //      DropNewBall(robot);
+        //      ReadyBeaconArm (robot);
+        //      DisarmBeaconArm (robot);
+        //      SenseBeacon (robot);
+        //      CalibrateGyro(robot);
         //***********************************************************************************
 
         cmds.LaunchBallAndReset(robot, RobotConfiguration.LAUNCH_POWER);
@@ -69,12 +69,10 @@ class AutonomousWithEncoders extends LinearOpMode
         //Turn to face center
         if(RobotConfiguration.ALLIANCE.equals("RED"))
         {
-            //cmds.TurnRight(robot,RobotConfiguration.TURN_POWER,100);
             cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER, 9, -9, 1.0); //90 degree right turn
         }
-        else
+        else    //BLUE
         {
-            //cmds.TurnLeft(robot,RobotConfiguration.TURN_POWER,100);
             cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER,-9, 9, 1.0);  //90 degree left turn
         }
 
@@ -83,7 +81,7 @@ class AutonomousWithEncoders extends LinearOpMode
         {
             cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER,  48,  48, 3.0);  //Forward 48 Inches with 3 Sec timeout
         }
-        else
+        else //SHORT
         {
             cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER,  36,  36, 3.0);  //Forward 36 Inches with 3 Sec timeout
         }
