@@ -66,24 +66,24 @@ class AutonomousWithEncoders extends LinearOpMode
         telemetry.addData("Status", "Delay Complete!");
         telemetry.update();
 
-        //Turn to face center
+        //Turn 90 degrees to face center
         if(RobotConfiguration.ALLIANCE.equals("RED"))
         {
-            cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER, RobotConfiguration.NINETY_DEGREE_TURN_INCHES, -RobotConfiguration.NINETY_DEGREE_TURN_INCHES, 3.0); //90 degree right turn
+            cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER, RobotConfiguration.NINETY_DEGREE_TURN_INCHES, -RobotConfiguration.NINETY_DEGREE_TURN_INCHES, 3.0);
         }
         else    //BLUE
         {
-            cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER, -RobotConfiguration.NINETY_DEGREE_TURN_INCHES, RobotConfiguration.NINETY_DEGREE_TURN_INCHES, 3.0);  //90 degree left turn
+            cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER, -RobotConfiguration.NINETY_DEGREE_TURN_INCHES, RobotConfiguration.NINETY_DEGREE_TURN_INCHES, 3.0);
         }
 
         //Drive to center
         if (RobotConfiguration.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER,  RobotConfiguration.LONG_AUTO_DRIVE_INCHES,  RobotConfiguration.LONG_AUTO_DRIVE_INCHES, 3.0);
+            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER,  RobotConfiguration.LONG_AUTO_DRIVE_INCHES,  RobotConfiguration.LONG_AUTO_DRIVE_INCHES, 5.0);
         }
         else //SHORT
         {
-            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER,  RobotConfiguration.SHORT_AUTO_DRIVE_INCHES,  RobotConfiguration.SHORT_AUTO_DRIVE_INCHES, 3.0);
+            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER,  RobotConfiguration.SHORT_AUTO_DRIVE_INCHES,  RobotConfiguration.SHORT_AUTO_DRIVE_INCHES, 5.0);
         }
 
         cmds.StopDriving(robot);

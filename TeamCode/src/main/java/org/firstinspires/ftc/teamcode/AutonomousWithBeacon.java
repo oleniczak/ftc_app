@@ -60,39 +60,39 @@ class AutonomousWithBeacon extends LinearOpMode //RobotCommands
         //Turn to face center
         if(RobotConfiguration.ALLIANCE.equals("RED"))
         {
-            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, 9, -9, 1.0);  //90 degree right turn
+            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, RobotConfiguration.NINETY_DEGREE_TURN_INCHES, -RobotConfiguration.NINETY_DEGREE_TURN_INCHES, 3.0);  //90 degree right turn
         }
         else
         {
-            cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER, -9, 9, 1.0);  //90 degree left turn
+            cmds.EncoderDrive(robot,RobotConfiguration.TURN_POWER, -RobotConfiguration.NINETY_DEGREE_TURN_INCHES, RobotConfiguration.NINETY_DEGREE_TURN_INCHES, 3.0);  //90 degree left turn
         }
 
         //To drive forward with distance:
         if (RobotConfiguration.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, 48, 48, 3.0);
+            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, 48, 48, 5.0);
         }
         else //SHORT
         {
-            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, 24, 24, 3.0);
+            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, 24, 24, 5.0);
         }
 
         //Turn to Beacon
         if(RobotConfiguration.ALLIANCE.equals("RED") && RobotConfiguration.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, 5, -5, 1.0);  //75? degree left turn
+            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, 5, -5, 3.0);  //75? degree left turn
         }
         else if (RobotConfiguration.ALLIANCE.equals("RED"))  //RED SHORT
         {
-            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, 9, -9, 1.0);  //90 degree right turn
+            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, RobotConfiguration.NINETY_DEGREE_TURN_INCHES, -RobotConfiguration.NINETY_DEGREE_TURN_INCHES, 3.0);  //90 degree right turn
         }
         else if(RobotConfiguration.ALLIANCE.equals("BLUE") && RobotConfiguration.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, -5, 5, 1.0);  //75? degree left turn
+            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, -5, 5, 3.0);  //75? degree left turn
         }
         else //BLUE SHORT
         {
-            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, -9, 9, 1.0);  //90 degree right turn
+            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, -RobotConfiguration.NINETY_DEGREE_TURN_INCHES, RobotConfiguration.NINETY_DEGREE_TURN_INCHES, 3.0);  //90 degree right turn
         }
 
         cmds.ReadyBeaconArm(robot);
@@ -100,14 +100,14 @@ class AutonomousWithBeacon extends LinearOpMode //RobotCommands
         if (RobotConfiguration.START_POSITION.equals("LONG"))
         {
             //Drive all the way up and push the button
-            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, 36, 36, 3.0);
+            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, 36, 36, 5.0);
         }
         else
         {
-            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, 24, 24, 3.0);
+            cmds.EncoderDrive(robot, RobotConfiguration.DRIVE_POWER, 24, 24, 5.0);
         }
         //Backup 3 inches to assess color
-        cmds.EncoderDrive(robot,-RobotConfiguration.DRIVE_POWER, 3, 3, 1.0);
+        cmds.EncoderDrive(robot,-RobotConfiguration.DRIVE_POWER, 3, 3, 5.0);
 
         //wait 5 seconds before determining whether to drive forward again (wrong color)
         sleep(5000);
