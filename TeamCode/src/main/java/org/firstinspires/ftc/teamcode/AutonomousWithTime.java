@@ -79,7 +79,7 @@ class AutonomousWithTime extends LinearOpMode
         {
             cmds.TurnRight(robot, RobotConfiguration.TURN_POWER, RobotConfiguration.NINETY_DEGREE_TURN_TIME);
         }
-        else
+        else    //BLUE
         {
             cmds.TurnLeft(robot, RobotConfiguration.TURN_POWER, RobotConfiguration.NINETY_DEGREE_TURN_TIME);
         }
@@ -89,7 +89,7 @@ class AutonomousWithTime extends LinearOpMode
         {
             cmds.DriveForward(robot, RobotConfiguration.DRIVE_POWER, RobotConfiguration.LONG_AUTO_DRIVE_TIME);
         }
-        else
+        else    //SHORT
         {
             cmds.DriveForward(robot, RobotConfiguration.DRIVE_POWER, RobotConfiguration.SHORT_AUTO_DRIVE_TIME);
         }
