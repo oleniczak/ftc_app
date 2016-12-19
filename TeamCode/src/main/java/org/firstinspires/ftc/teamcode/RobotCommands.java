@@ -158,17 +158,19 @@ public class RobotCommands extends LinearOpMode
         telemetry.addData("InitializeHW", "> Resetting Encoders...");
         telemetry.update();
 
-        robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        idle();
+        //will stop and reset with each move, so no need to include here too
+        //robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        //idle();
 
         robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        //since not reset, position doesn't mean anything - telemetry only ensures they are being read
         telemetry.addData
                 ("InitializeHW",  "> > Starting at %7d :%7d :%7d :%7d",
                         robot.motorFrontLeft.getCurrentPosition(),
@@ -254,6 +256,87 @@ public class RobotCommands extends LinearOpMode
         TurnLeft(robot, -power, turntime);
     }
 
+    public void EncoderDrive(Hardware robot,
+                             double speed,
+                             double leftInches, double rightInches,
+                             double timeoutS)
+    {
+        int newLeftFrontTarget;
+        int newRightFrontTarget;
+        int newLeftBackTarget;
+        int newRightBackTarget;
+
+        telemetry.addData("EncoderDrive", "EncoderDrive Starting...");
+        telemetry.update();
+
+        robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        // Ensure that the opmode is still active
+        if (opModeIsActive())
+        {
+            // Calculate new target position
+            newLeftFrontTarget = robot.motorFrontLeft.getCurrentPosition() + (int) (leftInches * RobotConfiguration.COUNTS_PER_INCH);
+            newRightFrontTarget = robot.motorFrontRight.getCurrentPosition() + (int) (rightInches * RobotConfiguration.COUNTS_PER_INCH);
+            newLeftBackTarget = robot.motorBackLeft.getCurrentPosition() + (int) (leftInches * RobotConfiguration.COUNTS_PER_INCH);
+            newRightBackTarget = robot.motorBackRight.getCurrentPosition() + (int) (rightInches * RobotConfiguration.COUNTS_PER_INCH);
+
+            // Pass target position to motor controller
+            robot.motorFrontLeft.setTargetPosition(newLeftFrontTarget);
+            robot.motorFrontRight.setTargetPosition(newRightFrontTarget);
+            robot.motorBackLeft.setTargetPosition(newLeftBackTarget);
+            robot.motorBackRight.setTargetPosition(newRightBackTarget);
+
+            // Turn On RUN_TO_POSITION
+            robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+            robot.motorBackRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+
+            // reset the timeout time and start motion.
+            runtime.reset();
+            robot.motorFrontLeft.setPower(Math.abs(speed));
+            robot.motorFrontRight.setPower(Math.abs(speed));
+            robot.motorBackLeft.setPower(Math.abs(speed));
+            robot.motorBackRight.setPower(Math.abs(speed));
+
+            // keep looping while we are still active, and there is time left, and both motors are running.
+            while (opModeIsActive() &&
+                    runtime.seconds() < timeoutS &&
+                    robot.motorFrontLeft.isBusy() &&
+                    robot.motorFrontRight.isBusy() &&
+                    robot.motorBackLeft.isBusy() &&
+                    robot.motorBackRight.isBusy()
+                    )
+            {
+                // Display it for the driver.
+                telemetry.addData("EncoderDrive", "> Currently at %7d :%7d :%7d :&7d",
+                        robot.motorFrontLeft.getCurrentPosition(),
+                        robot.motorFrontRight.getCurrentPosition(),
+                        robot.motorBackLeft.getCurrentPosition(),
+                        robot.motorBackRight.getCurrentPosition());
+                telemetry.addData("EncoderDrive", "> Destination of %7d :%7d :%7d :&7d",
+                        newLeftFrontTarget, newRightFrontTarget, newLeftBackTarget, newRightBackTarget);
+                telemetry.update();
+            }
+
+            // Stop all motion;
+            StopDriving(robot);
+
+            // Turn off RUN_TO_POSITION
+            robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+            //  sleep(250);   // optional pause after each move
+        }
+        telemetry.addData("EncoderDrive", "EncoderDrive Complete!");
+        telemetry.update();
+    }
+
     public void ReadyBeaconArm(Hardware robot)
     {
         telemetry.addData("ReadyBeaconArm", "Readying Beacon Arm ...");
@@ -280,7 +363,9 @@ public class RobotCommands extends LinearOpMode
 
     //*****************************************
 
-    public void SenseBeacon(Hardware robot) {
+    public void SenseBeacon(Hardware robot)
+    {
+        //should be in passive mode
         telemetry.addData("SenseBeacon", "Beginning Beacon Sensing ...");
         telemetry.update();
 
@@ -332,81 +417,6 @@ public class RobotCommands extends LinearOpMode
         telemetry.update();
     }
 
-    public void EncoderDrive(Hardware robot,
-                             double speed,
-                             double leftInches, double rightInches,
-                             double timeoutS)
-    {
-        int newLeftFrontTarget;
-        int newRightFrontTarget;
-        int newLeftBackTarget;
-        int newRightBackTarget;
-
-        telemetry.addData("EncoderDrive", "EncoderDrive Starting...");
-        telemetry.update();
-
-        // Ensure that the opmode is still active
-        if (opModeIsActive())
-        {
-            // Calculate new target position
-            newLeftFrontTarget = robot.motorFrontLeft.getCurrentPosition() + (int) (leftInches * RobotConfiguration.COUNTS_PER_INCH);
-            newRightFrontTarget = robot.motorFrontRight.getCurrentPosition() + (int) (rightInches * RobotConfiguration.COUNTS_PER_INCH);
-            newLeftBackTarget = robot.motorBackLeft.getCurrentPosition() + (int) (leftInches * RobotConfiguration.COUNTS_PER_INCH);
-            newRightBackTarget = robot.motorBackRight.getCurrentPosition() + (int) (rightInches * RobotConfiguration.COUNTS_PER_INCH);
-
-            // Pass target position to motor controller
-            robot.motorFrontLeft.setTargetPosition(newLeftFrontTarget);
-            robot.motorFrontRight.setTargetPosition(newRightFrontTarget);
-            robot.motorBackLeft.setTargetPosition(newLeftBackTarget);
-            robot.motorBackRight.setTargetPosition(newRightBackTarget);
-
-            // Turn On RUN_TO_POSITION
-            robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-            robot.motorBackRight.setMode(DcMotor.RunMode.RUN_TO_POSITION);
-
-            // reset the timeout time and start motion.
-            runtime.reset();
-            robot.motorFrontLeft.setPower(Math.abs(speed));
-            robot.motorFrontRight.setPower(Math.abs(speed));
-            robot.motorBackLeft.setPower(Math.abs(speed));
-            robot.motorBackRight.setPower(Math.abs(speed));
-
-            // keep looping while we are still active, and there is time left, and both motors are running.
-            while (opModeIsActive() &&
-                    runtime.seconds() < timeoutS &&
-                    robot.motorFrontLeft.isBusy() &&
-                    robot.motorFrontRight.isBusy() &&
-                    robot.motorBackLeft.isBusy() &&
-                    robot.motorBackRight.isBusy()
-                    ) {
-                // Display it for the driver.
-                telemetry.addData("EncoderDrive", "> Currently at %7d :%7d :%7d :&7d",
-                        robot.motorFrontLeft.getCurrentPosition(),
-                        robot.motorFrontRight.getCurrentPosition(),
-                        robot.motorBackLeft.getCurrentPosition(),
-                        robot.motorBackRight.getCurrentPosition());
-                telemetry.addData("EncoderDrive", "> Destination of %7d :%7d :%7d :&7d",
-                        newLeftFrontTarget, newRightFrontTarget, newLeftBackTarget, newRightBackTarget);
-                telemetry.update();
-            }
-
-            // Stop all motion;
-            StopDriving(robot);
-
-            // Turn off RUN_TO_POSITION
-            robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-            //  sleep(250);   // optional pause after each move
-        }
-        telemetry.addData("EncoderDrive", "EncoderDrive Complete!");
-        telemetry.update();
-    }
-
     public void CalibrateGyro(Hardware robot)
     {
         telemetry.addData("CalibrateGyro", "Calibrating Gyro. Do Not move!");
@@ -423,7 +433,6 @@ public class RobotCommands extends LinearOpMode
         telemetry.addData("CalibrateGyro", "Gyro Calibration Complete!");
         telemetry.update();
     }
-
 
     public void waitForTick(long periodMs)
     {
