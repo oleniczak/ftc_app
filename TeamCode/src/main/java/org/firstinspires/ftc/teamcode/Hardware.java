@@ -24,11 +24,11 @@ public class Hardware
     DcMotor motorFrontRight=null;
     DcMotor motorBackRight=null;
 
-    DcMotor motorLaunch=null;
-    DcMotor motorLift=null;
-    DcMotor motorCollect=null;
+//    DcMotor motorLaunch=null;
+//    DcMotor motorLift=null;
+//    DcMotor motorCollect=null;
 
-    Servo servoBallGate=null;
+//    Servo servoBallGate=null;
     //Servo servoForkLeft=null;
     //Servo servoForkRight=null;
     //Servo servoButtonArm=null;
@@ -62,14 +62,14 @@ public class Hardware
         motorBackLeft = hwMap.dcMotor.get("back_left");
         motorBackRight = hwMap.dcMotor.get("back_right");
 
-        motorLaunch = hwMap.dcMotor.get("launch");
-        motorLift = hwMap.dcMotor.get("lift");
-        motorCollect = hwMap.dcMotor.get("collect");
+//        motorLaunch = hwMap.dcMotor.get("launch");
+//        motorLift = hwMap.dcMotor.get("lift");
+//        motorCollect = hwMap.dcMotor.get("collect");
 
         /* ******************************************************/
         // Define Servos
         /* ******************************************************/
-        servoBallGate = hwMap.servo.get("gate");
+//        servoBallGate = hwMap.servo.get("gate");
 //        servoForkLeft = hwMap.servo.get("fork");
 //        servoForkRight = hwMap.servo.get("fork1");
 //        servoButtonArm = hwMap.servo.get("button");

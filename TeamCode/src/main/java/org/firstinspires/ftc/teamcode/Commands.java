@@ -55,12 +55,12 @@ public class Commands extends LinearOpMode
         robot.motorBackLeft.setPower(0);
         robot.motorBackRight.setPower(0);
 
-        robot.motorLaunch.setPower(0);
+//        robot.motorLaunch.setPower(0);
 //        robot.motorLift.setPower(0);
 //        robot.motorCollect.setPower(0);
 
         // Set motors without Encoder
-        robot.motorLaunch.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+//        robot.motorLaunch.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 //        robot.motorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 //        robot.motorCollect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
@@ -137,12 +137,12 @@ public class Commands extends LinearOpMode
         telemetry.addData("Initialize Servos", "> Initializing Servo Positions...");
         telemetry.update();
 
-        robot.servoBallGate.setPosition(Configuration.OPEN_BALL_GATE_POS);
+//        robot.servoBallGate.setPosition(Configuration.OPEN_BALL_GATE_POS);
 //        robot.servoForkLeft.setPosition(Configuration.CLOSED_FORK_SERVO_POS);
 //        robot.servoForkRight.setPosition(Configuration.CLOSED_FORK_SERVO_POS);
 //        robot.servoButtonArm.setPosition(Configuration.START_BUTTON_POS);
 
-        telemetry.addData("InitializeHW", "> > Ball gate position: " + robot.servoBallGate.getPosition());
+//        telemetry.addData("InitializeHW", "> > Ball gate position: " + robot.servoBallGate.getPosition());
 //        telemetry.addData("InitializeHW", "> > Fork left position: " + robot.servoForkLeft.getPosition());
 //        telemetry.addData("InitializeHW", "> > Fork right position: " + robot.servoForkRight.getPosition());
 //        telemetry.addData("InitializeHW", "> > Button arm position: " + robot.servoButtonArm.getPosition());
@@ -242,9 +242,10 @@ public class Commands extends LinearOpMode
         telemetry.update();
     }
 
-    public void gyroDrive (Hardware robot, double speed,
-                            double distance,
-                            double angle,
+    public void GyroDrive (Hardware robot,
+                           double speed,
+                           double distance,
+                           double angle,
                            double timeoutS)
     {
         int newLeftFrontTarget;
@@ -261,6 +262,17 @@ public class Commands extends LinearOpMode
 
         telemetry.addData("GyroDrive", "GyroDrive Starting...");
         telemetry.update();
+
+        robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        idle();
+
+        robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Ensure that the opmode is still active
         if (opModeIsActive())
@@ -416,11 +428,6 @@ public class Commands extends LinearOpMode
         return Range.clip(error * PCoeff, -1, 1);
     }
 
-//    public void GyroDrive
-//    {
-//        //stub
-//    }
-
     public void StopDriving(Hardware robot)
     {
         telemetry.addData("Stop Drive", "Halting ...");
@@ -440,7 +447,7 @@ public class Commands extends LinearOpMode
         telemetry.addData("DropNewBall", "Beginning Ball Drop ...");
         telemetry.update();
 
-        robot.servoBallGate.setPosition(Configuration.OPEN_BALL_GATE_POS);
+//        robot.servoBallGate.setPosition(Configuration.OPEN_BALL_GATE_POS);
 
         //wait for ball to drop
         //  sleep will not work in OpMode
@@ -452,7 +459,7 @@ public class Commands extends LinearOpMode
         }
 
         //close ball gate
-        robot.servoBallGate.setPosition(Configuration.CLOSED_BALL_GATE_POS);
+//        robot.servoBallGate.setPosition(Configuration.CLOSED_BALL_GATE_POS);
 
 
         telemetry.addData("DropNewBall", "Ball Drop Complete!");

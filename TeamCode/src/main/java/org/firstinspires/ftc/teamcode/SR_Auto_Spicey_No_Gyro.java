@@ -35,16 +35,13 @@ class SR_Auto_Spicey_No_Gyro extends LinearOpMode {
         cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 6, 6, 5.0);
 
         //turn on launch motor
-        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
+//        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
 
-        //Use delay until ball launch is ready for use
-        sleep(Configuration.AUTO_DELAY_TIME);
+        cmds.DropAndShoot(robot);
 
-//        cmds.DropAndShoot(robot);
+        cmds.DropAndShoot(robot);
 
-//        cmds.DropAndShoot(robot);
-
-        robot.motorLaunch.setPower(0);
+//        robot.motorLaunch.setPower(0);
 
         //Drive to line up with closest beacon (assumes SHORT position)
         cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 70, 70, 5.0);
@@ -70,7 +67,6 @@ class SR_Auto_Spicey_No_Gyro extends LinearOpMode {
 //        cmds.SenseBeacon(robot);
 
         //Turn 90 degrees to drive to second beacon
-        //***** REPLACE WITH GYRO READINGS *****
         if(Configuration.ALLIANCE.equals("RED"))
         {
             cmds.EncoderDrive(robot, Configuration.TURN_POWER, Configuration.NINETY_DEGREE_TURN_INCHES, -Configuration.NINETY_DEGREE_TURN_INCHES, 3.0);
@@ -84,7 +80,6 @@ class SR_Auto_Spicey_No_Gyro extends LinearOpMode {
         cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 40, 40, 5.0);
 
         //Turn 90 degrees to face beacon
-        //***** REPLACE WITH GYRO READINGS *****
         if(Configuration.ALLIANCE.equals("RED"))
         {
             cmds.EncoderDrive(robot, Configuration.TURN_POWER, -Configuration.NINETY_DEGREE_TURN_INCHES, Configuration.NINETY_DEGREE_TURN_INCHES, 3.0);

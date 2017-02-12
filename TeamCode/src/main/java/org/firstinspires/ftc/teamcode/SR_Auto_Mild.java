@@ -8,7 +8,7 @@ FUNCTION:
     Autonomous
 */
 
-@Autonomous(name="Mild (Config Alliance & Position)", group="Autonomous")
+@Autonomous(name="Mild no Gyro (Config Alliance & Position)", group="Autonomous")
 //@Disabled
 class SR_Auto_Mild extends LinearOpMode
 {
@@ -53,7 +53,7 @@ class SR_Auto_Mild extends LinearOpMode
         }
 
         //turn on launch motor
-        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
+//        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
 
         //Use delay until ball launch is ready for use
         //sleep(Configuration.AUTO_DELAY_TIME);
@@ -62,7 +62,7 @@ class SR_Auto_Mild extends LinearOpMode
 
         cmds.DropAndShoot(robot);
 
-        robot.motorLaunch.setPower(0);
+//        robot.motorLaunch.setPower(0);
 
         //Drive to center
         if (Configuration.START_POSITION.equals("LONG"))
