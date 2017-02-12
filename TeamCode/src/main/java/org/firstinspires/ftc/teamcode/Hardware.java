@@ -26,13 +26,12 @@ public class Hardware
 
     DcMotor motorLaunch=null;
     DcMotor motorLift=null;
-    DcMotor motorCollectLower=null;
-    DcMotor motorCollectUpper=null;
+    DcMotor motorCollect=null;
 
     Servo servoBallGate=null;
-    Servo servoForkLeft=null;
-    Servo servoForkRight=null;
-    Servo servoButtonArm=null;
+    //Servo servoForkLeft=null;
+    //Servo servoForkRight=null;
+    //Servo servoButtonArm=null;
 
     ModernRoboticsI2cGyro sensorGyro=null;
     ModernRoboticsI2cColorSensor sensorColor=null;
@@ -65,41 +64,22 @@ public class Hardware
 
         motorLaunch = hwMap.dcMotor.get("launch");
         motorLift = hwMap.dcMotor.get("lift");
-        motorCollectLower = hwMap.dcMotor.get("collect");
-        motorCollectUpper = hwMap.dcMotor.get("collect1");
+        motorCollect = hwMap.dcMotor.get("collect");
 
         /* ******************************************************/
         // Define Servos
         /* ******************************************************/
         servoBallGate = hwMap.servo.get("gate");
-        servoForkLeft = hwMap.servo.get("fork");
-        servoForkRight = hwMap.servo.get("fork1");
-        servoButtonArm = hwMap.servo.get("button");
+//        servoForkLeft = hwMap.servo.get("fork");
+//        servoForkRight = hwMap.servo.get("fork1");
+//        servoButtonArm = hwMap.servo.get("button");
 
         /* ******************************************************/
         // Define Sensors
         /* ******************************************************/
-        sensorColor = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
         sensorGyro = (ModernRoboticsI2cGyro) hwMap.gyroSensor.get("gyro");
-/*
-        //Set Starting values
+        sensorColor = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
 
-        motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        //idle();
-
-        motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
-        servoBallGate.setPosition(RobotConfiguration.CLOSED_BALL_GATE_POS);
-        servoForkLeft.setPosition(RobotConfiguration.CLOSED_FORK_SERVO_POS);
-        servoForkRight.setPosition(RobotConfiguration.CLOSED_FORK_SERVO_POS);
-        servoButtonArm.setPosition(RobotConfiguration.START_BUTTON_POS);
-*/
         telemetry.addData("Hardware", "Hardware Definition Complete!");
         telemetry.update();
     }

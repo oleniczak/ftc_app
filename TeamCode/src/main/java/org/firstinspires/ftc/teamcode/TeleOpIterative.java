@@ -13,8 +13,8 @@ FUNCTION:
 public class TeleOpIterative extends OpMode
 {
     private Hardware robot = new Hardware(telemetry);
-    private RobotConfiguration configs = new RobotConfiguration(telemetry);
-    private RobotCommands cmds = new RobotCommands(telemetry);
+    private Configuration configs = new Configuration(telemetry);
+    private Commands cmds = new Commands(telemetry);
 
     private final ElapsedTime runtime = new ElapsedTime();
 
@@ -60,6 +60,8 @@ public class TeleOpIterative extends OpMode
         telemetry.update();
 
         runtime.reset();
+
+        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
     }
 
     /* Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP */
@@ -83,58 +85,59 @@ public class TeleOpIterative extends OpMode
 
         //Main Driver - Ball collect motor controls
         CollectLT = gamepad1.right_trigger -gamepad1.left_trigger;
-        CollectUT = gamepad1.right_trigger -gamepad1.left_trigger;
+        //CollectUT = gamepad1.right_trigger -gamepad1.left_trigger;
 
-        robot.motorCollectLower.setPower(CollectLT);
-        robot.motorCollectUpper.setPower(CollectUT);
+        robot.motorCollect.setPower(CollectLT);
+        //robot.motorCollectUpper.setPower(CollectUT);
 
         //Alternate Driver  - Fork lift motor controls
         LiftY = gamepad2.left_stick_y;
 
-        robot.motorLift.setPower(LiftY);
+        //robot.motorLift.setPower(LiftY);
 
         //Alternate Driver - Ball launch motor controls
         LaunchY = gamepad2.right_stick_y;
 
-        robot.motorLaunch.setPower(LaunchY);
+//        robot.motorLaunch.setPower(LaunchY);
+
 
         //Main driver - servo controls
-        if (gamepad1.right_bumper)
-        {
-            robot.servoForkLeft.setPosition(RobotConfiguration.OPEN_FORK_SERVO_POS);
-            robot.servoForkRight.setPosition(RobotConfiguration.OPEN_FORK_SERVO_POS);
-        }
-        else
-        {
-            robot.servoForkLeft.setPosition(RobotConfiguration.CLOSED_FORK_SERVO_POS);
-            robot.servoForkRight.setPosition(RobotConfiguration.CLOSED_FORK_SERVO_POS);
-        }
+//        if (gamepad1.right_bumper)
+//        {
+//            robot.servoForkLeft.setPosition(Configuration.OPEN_FORK_SERVO_POS);
+//            robot.servoForkRight.setPosition(Configuration.OPEN_FORK_SERVO_POS);
+//        }
+//        else
+//        {
+//            robot.servoForkLeft.setPosition(Configuration.CLOSED_FORK_SERVO_POS);
+//            robot.servoForkRight.setPosition(Configuration.CLOSED_FORK_SERVO_POS);
+//        }
 
         if (gamepad1.b)
         {
-            robot.servoBallGate.setPosition(RobotConfiguration.OPEN_BALL_GATE_POS);
-            //cmds.DropNewBall();
+  //          robot.servoBallGate.setPosition(Configuration.OPEN_BALL_GATE_POS);
+            cmds.DropAndShoot(robot);
         }
-        else
-        {
-            robot.servoBallGate.setPosition(RobotConfiguration.CLOSED_BALL_GATE_POS);
-        }
+//        else
+ //       {
+ //           robot.servoBallGate.setPosition(Configuration.CLOSED_BALL_GATE_POS);
+ //       }
 
         //Alternate driver - servo controls
-        if (gamepad2.x)
-        {
-            cmds.ReadyBeaconArm(robot);
-        }
-        else
-        {
-            cmds.DisarmBeaconArm(robot);
-        }
+//        if (gamepad2.x)
+//        {
+//            cmds.ReadyBeaconArm(robot);
+//        }
+//        else
+//        {
+//            cmds.DisarmBeaconArm(robot);
+//        }
 
         //Alternate Driver - One button push to launch ball
-        if (gamepad2.b)
-        {
-            cmds.LaunchBallAndReset(robot, RobotConfiguration.LAUNCH_POWER);
-        }
+//        if (gamepad2.b)
+//        {
+//            cmds.LaunchBallAndReset(robot, Configuration.LAUNCH_POWER);
+//        }
 
         // Pause for metronome tick.  40 mS each cycle = update 25 times a second.
         //cmds.waitForTick(40);
