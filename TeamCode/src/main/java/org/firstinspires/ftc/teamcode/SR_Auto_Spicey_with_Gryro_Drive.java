@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /**
- * Created by Aimee on 2/12/2017.
+ * 2/12/2017 9019
  */
 
 @Autonomous(name="Spicey Gyro Drive(Config Alliance & Position)", group="Autonomous")

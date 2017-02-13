@@ -126,7 +126,7 @@ public class Commands extends LinearOpMode
             idle();
         }
 
-        robot.sensorColor.enableLed(false);
+//        robot.sensorColor.enableLed(false);
 
         telemetry.addData("InitializeHW", "> Initializing Gyro Complete!");
         telemetry.update();
@@ -281,10 +281,10 @@ public class Commands extends LinearOpMode
             moveCounts = (int)(distance * Configuration.COUNTS_PER_INCH);
 
             // Calculate new target position
-            newLeftFrontTarget = robot.motorFrontLeft.getCurrentPosition() + (int) moveCounts;
-            newRightFrontTarget = robot.motorFrontRight.getCurrentPosition() + (int) moveCounts;
-            newLeftBackTarget = robot.motorBackLeft.getCurrentPosition() + (int) moveCounts;
-            newRightBackTarget = robot.motorBackRight.getCurrentPosition() + (int) moveCounts;
+            newLeftFrontTarget = robot.motorFrontLeft.getCurrentPosition() + moveCounts;
+            newRightFrontTarget = robot.motorFrontRight.getCurrentPosition() + moveCounts;
+            newLeftBackTarget = robot.motorBackLeft.getCurrentPosition() + moveCounts;
+            newRightBackTarget = robot.motorBackRight.getCurrentPosition() + moveCounts;
 
             // Set Target and Turn On RUN_TO_POSITION
             robot.motorFrontLeft.setTargetPosition(newLeftFrontTarget);
@@ -428,6 +428,23 @@ public class Commands extends LinearOpMode
         return Range.clip(error * PCoeff, -1, 1);
     }
 
+    public void GyroHold(Hardware robot, double speed, double angle, double holdTime)
+    {
+
+        ElapsedTime holdTimer = new ElapsedTime();
+
+        // keep looping while we have time remaining.
+        holdTimer.reset();
+        while (opModeIsActive() && (holdTimer.time() < holdTime))
+        {
+            // Update telemetry & Allow time for other processes to run.
+            onHeading(robot, speed, angle, Configuration.P_TURN_COEFF);
+//            telemetry.update();
+        }
+
+        StopDriving(robot);
+    }
+
     public void StopDriving(Hardware robot)
     {
         telemetry.addData("Stop Drive", "Halting ...");
@@ -460,7 +477,6 @@ public class Commands extends LinearOpMode
 
         //close ball gate
 //        robot.servoBallGate.setPosition(Configuration.CLOSED_BALL_GATE_POS);
-
 
         telemetry.addData("DropNewBall", "Ball Drop Complete!");
         telemetry.update();

@@ -78,7 +78,7 @@ public class Hardware
         // Define Sensors
         /* ******************************************************/
         sensorGyro = (ModernRoboticsI2cGyro) hwMap.gyroSensor.get("gyro");
-        sensorColor = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
+//        sensorColor = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
 
         telemetry.addData("Hardware", "Hardware Definition Complete!");
         telemetry.update();

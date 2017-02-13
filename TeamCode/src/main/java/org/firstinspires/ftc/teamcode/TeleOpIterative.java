@@ -61,7 +61,7 @@ public class TeleOpIterative extends OpMode
 
         runtime.reset();
 
-        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
+//        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
     }
 
     /* Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP */
@@ -87,7 +87,7 @@ public class TeleOpIterative extends OpMode
         CollectLT = gamepad1.right_trigger -gamepad1.left_trigger;
         //CollectUT = gamepad1.right_trigger -gamepad1.left_trigger;
 
-        robot.motorCollect.setPower(CollectLT);
+//        robot.motorCollect.setPower(CollectLT);
         //robot.motorCollectUpper.setPower(CollectUT);
 
         //Alternate Driver  - Fork lift motor controls

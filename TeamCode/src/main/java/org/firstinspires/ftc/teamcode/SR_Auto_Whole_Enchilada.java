@@ -4,7 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /**
- * Created by Aimee on 2/12/2017.
+ * 2/12/2017 9019
  */
 
 @Autonomous(name="Whole Enchilada (Config Alliance & Position)", group="Autonomous")
@@ -54,11 +54,13 @@ class SR_Auto_Whole_Enchilada extends LinearOpMode {
         {
             //cmds.EncoderDrive(robot, Configuration.TURN_POWER, -Configuration.NINETY_DEGREE_TURN_INCHES, Configuration.NINETY_DEGREE_TURN_INCHES, 3.0);
             cmds.GyroTurn(robot,Configuration.TURN_POWER,-90);
+            cmds.GyroHold(robot,Configuration.TURN_POWER,-90,0.5);
         }
         else    //BLUE
         {
             //cmds.EncoderDrive(robot, Configuration.TURN_POWER, Configuration.NINETY_DEGREE_TURN_INCHES, -Configuration.NINETY_DEGREE_TURN_INCHES, 3.0);
             cmds.GyroTurn(robot,Configuration.TURN_POWER,90);
+            cmds.GyroHold(robot,Configuration.TURN_POWER,90,0.5);
         }
 
         //Drive into beacon, pressing button
@@ -78,11 +80,13 @@ class SR_Auto_Whole_Enchilada extends LinearOpMode {
         {
             //cmds.EncoderDrive(robot, Configuration.TURN_POWER, Configuration.NINETY_DEGREE_TURN_INCHES, -Configuration.NINETY_DEGREE_TURN_INCHES, 3.0);
             cmds.GyroTurn(robot,Configuration.TURN_POWER,90);
+            cmds.GyroHold(robot,Configuration.TURN_POWER,90,0.5);
         }
         else    //BLUE
         {
             //cmds.EncoderDrive(robot, Configuration.TURN_POWER, -Configuration.NINETY_DEGREE_TURN_INCHES, Configuration.NINETY_DEGREE_TURN_INCHES, 3.0);
             cmds.GyroTurn(robot,Configuration.TURN_POWER,-90);
+            cmds.GyroHold(robot,Configuration.TURN_POWER,-90,0.5);
         }
 
         //Drive to second beacon
@@ -95,11 +99,13 @@ class SR_Auto_Whole_Enchilada extends LinearOpMode {
         {
             //cmds.EncoderDrive(robot, Configuration.TURN_POWER, -Configuration.NINETY_DEGREE_TURN_INCHES, Configuration.NINETY_DEGREE_TURN_INCHES, 3.0);
             cmds.GyroTurn(robot,Configuration.TURN_POWER,-90);
+            cmds.GyroHold(robot,Configuration.TURN_POWER,-90,0.5);
         }
         else    //BLUE
         {
             //cmds.EncoderDrive(robot, Configuration.TURN_POWER, Configuration.NINETY_DEGREE_TURN_INCHES, -Configuration.NINETY_DEGREE_TURN_INCHES, 3.0);
             cmds.GyroTurn(robot,Configuration.TURN_POWER,90);
+            cmds.GyroHold(robot,Configuration.TURN_POWER,90,0.5);
         }
 
         //Sensing beacon will also invoke a 3 inch drive if the opposite color is detected
