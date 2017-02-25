@@ -29,11 +29,10 @@ public class Commands extends LinearOpMode
     {
     }
 
-    public void InitializeHW(Hardware robot)
-    {
+    public void InitializeHW(Hardware robot) {
         //robot.DefineHardware(hardwareMap);
 
-        telemetry.addData("InitializeHW","Beginning HW Initialization...");
+        telemetry.addData("InitializeHW", "Beginning HW Initialization...");
         telemetry.update();
 
         /* ******************************************************/
@@ -55,14 +54,10 @@ public class Commands extends LinearOpMode
         robot.motorBackLeft.setPower(0);
         robot.motorBackRight.setPower(0);
 
-//        robot.motorLaunch.setPower(0);
-//        robot.motorLift.setPower(0);
-//        robot.motorCollect.setPower(0);
-
-        // Set motors without Encoder
-//        robot.motorLaunch.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        robot.motorLift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-//        robot.motorCollect.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.motorLaunch.setPower(0);
+        robot.motorLiftLeft.setPower(0);
+        robot.motorLiftRight.setPower(0);
+        robot.motorCollect.setPower(0);
 
         telemetry.addData("InitializeHW", "> Initializing Motors Complete!");
         telemetry.update();
@@ -86,7 +81,7 @@ public class Commands extends LinearOpMode
 
         //since not reset, position doesn't mean anything - telemetry only ensures they are being read
         telemetry.addData
-                ("InitializeHW",  "> > Starting at %7d :%7d :%7d :%7d",
+                ("InitializeHW", "> > Starting at %7d :%7d :%7d :%7d",
                         robot.motorFrontLeft.getCurrentPosition(),
                         robot.motorFrontRight.getCurrentPosition(),
                         robot.motorBackLeft.getCurrentPosition(),
@@ -95,6 +90,22 @@ public class Commands extends LinearOpMode
         telemetry.update();
 
         telemetry.addData("InitializeHW", "> Resetting Encoders Complete!");
+        telemetry.update();
+
+        /* ******************************************************/
+        // Initialize Servos
+        /* ******************************************************/
+        telemetry.addData("Initialize Servos", "> Initializing Servo Positions...");
+        telemetry.update();
+
+        robot.servoLift.setPosition(Configuration.CLOSED_LIFT_SERVO_POS);
+
+        telemetry.addData("InitializeHW", "> > Lift servo position: " + robot.servoLift.getPosition());
+
+        telemetry.addData("InitializeHW", "> Initializing Servo Positions Complete!");
+        telemetry.update();
+
+        telemetry.addData("InitializeHW", "Initialization HW Complete!");
         telemetry.update();
 
         /* ******************************************************/
@@ -117,42 +128,22 @@ public class Commands extends LinearOpMode
         final float values[] = hsvValues;
         */
 
-        robot.sensorGyro.calibrate();
+//        robot.sensorGyro.calibrate();
 
         // make sure the gyro is calibrated.
-        while (!isStopRequested() && robot.sensorGyro.isCalibrating())
-        {
-            sleep(50);
-            idle();
-        }
+//        while (!isStopRequested() && robot.sensorGyro.isCalibrating())
+//        {
+//            sleep(50);
+//            idle();
+//        }
 
-//        robot.sensorColor.enableLed(false);
+        robot.sensorColorLeft.enableLed(false);
+        robot.sensorColorRight.enableLed(false);
 
         telemetry.addData("InitializeHW", "> Initializing Gyro Complete!");
         telemetry.update();
-
-         /* ******************************************************/
-        // Initialize Servos
-        /* ******************************************************/
-        telemetry.addData("Initialize Servos", "> Initializing Servo Positions...");
-        telemetry.update();
-
-//        robot.servoBallGate.setPosition(Configuration.OPEN_BALL_GATE_POS);
-//        robot.servoForkLeft.setPosition(Configuration.CLOSED_FORK_SERVO_POS);
-//        robot.servoForkRight.setPosition(Configuration.CLOSED_FORK_SERVO_POS);
-//        robot.servoButtonArm.setPosition(Configuration.START_BUTTON_POS);
-
-//        telemetry.addData("InitializeHW", "> > Ball gate position: " + robot.servoBallGate.getPosition());
-//        telemetry.addData("InitializeHW", "> > Fork left position: " + robot.servoForkLeft.getPosition());
-//        telemetry.addData("InitializeHW", "> > Fork right position: " + robot.servoForkRight.getPosition());
-//        telemetry.addData("InitializeHW", "> > Button arm position: " + robot.servoButtonArm.getPosition());
-
-        telemetry.addData("InitializeHW", "> Initializing Servo Positions Complete!");
-        telemetry.update();
-
-        telemetry.addData("InitializeHW", "Initialization HW Complete!");
-        telemetry.update();
     }
+
 
     public void EncoderDrive(Hardware robot,
                              double speed,
@@ -459,26 +450,26 @@ public class Commands extends LinearOpMode
         telemetry.update();
     }
 
-    public void DropAndShoot(Hardware robot) //throws InterruptedException
+    public void Shoot(Hardware robot) //throws InterruptedException
     {
-        telemetry.addData("DropNewBall", "Beginning Ball Drop ...");
+        telemetry.addData("LaunchNewBall", "Beginning Ball Launch ...");
         telemetry.update();
 
-//        robot.servoBallGate.setPosition(Configuration.OPEN_BALL_GATE_POS);
+        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
 
         //wait for ball to drop
         //  sleep will not work in OpMode
         //  sleep(configs.BALL_GATE_OPEN_TIME);
         runtime.reset();
-        while (runtime.milliseconds() < Configuration.BALL_GATE_OPEN_TIME) {
-            telemetry.addData("Status", " Wait for ball drop:  %2.5f S Elapsed", runtime.seconds());
+        while (runtime.milliseconds() < Configuration.LAUNCH_TIME)
+        {
+            telemetry.addData("Status", " Wait for ball launch:  %2.5f S Elapsed", runtime.seconds());
             telemetry.update();
         }
 
-        //close ball gate
-//        robot.servoBallGate.setPosition(Configuration.CLOSED_BALL_GATE_POS);
+        robot.motorLaunch.setPower(0);
 
-        telemetry.addData("DropNewBall", "Ball Drop Complete!");
+        telemetry.addData("LaunchNewBall", "Ball Launch Complete!");
         telemetry.update();
     }
 
@@ -487,48 +478,52 @@ public class Commands extends LinearOpMode
         telemetry.addData("SenseBeacon", "Beginning Beacon Sensing ...");
         telemetry.update();
 
-        robot.sensorColor.red();
-        robot.sensorColor.green();
-        robot.sensorColor.blue();
-        robot.sensorColor.alpha();
-        robot.sensorColor.argb();
+        robot.sensorColorLeft.red();
+        robot.sensorColorLeft.green();
+        robot.sensorColorLeft.blue();
+        robot.sensorColorLeft.alpha();
+        robot.sensorColorLeft.argb();
 
-        telemetry.addData("SenseBeacon", "> Red: " + robot.sensorColor.red());
-        telemetry.addData("SenseBeacon", "> Green: " + robot.sensorColor.green());
-        telemetry.addData("SenseBeacon", "> Blue: " + robot.sensorColor.blue());
-        telemetry.addData("SenseBeacon", "> Clear: " + robot.sensorColor.alpha());
-        telemetry.addData("SenseBeacon", "> Clear: " + robot.sensorColor.argb());
+        telemetry.addData("SenseBeacon", "> Red: " + robot.sensorColorLeft.red());
+        telemetry.addData("SenseBeacon", "> Green: " + robot.sensorColorLeft.green());
+        telemetry.addData("SenseBeacon", "> Blue: " + robot.sensorColorLeft.blue());
+        telemetry.addData("SenseBeacon", "> Clear: " + robot.sensorColorLeft.alpha());
+        telemetry.addData("SenseBeacon", "> Clear?: " + robot.sensorColorLeft.argb());
         telemetry.update();
 
-        while (robot.sensorColor.alpha() < 20)
+        while (robot.sensorColorLeft.alpha() < 20)
         {
-            if ((robot.sensorColor.red() >= 8) && (Configuration.ALLIANCE.equals("BLUE")))
+            if ((robot.sensorColorLeft.red() >= 8) && (Configuration.ALLIANCE.equals("BLUE")))
             {
                 // Red beacon found, need to press button
-                telemetry.addData("SenseBeacon", "> > Red Found :" + robot.sensorColor.red());
+                telemetry.addData("SenseBeacon", "> > Red Found :" + robot.sensorColorLeft.red());
                 telemetry.update();
+
+                //wait 5 seconds before determining whether to drive forward again (wrong color)
+                sleep(5000);
+
                 // Drive forward 3 inches with the sensor arm extended
                 EncoderDrive(robot, Configuration.APPROACH_SPEED, 3, 3, 1.0);
                 //Back off button
                 EncoderDrive(robot,-Configuration.APPROACH_SPEED,3,3,1.0);
             }
-            else if ((robot.sensorColor.blue() <= 3) && (Configuration.ALLIANCE.equals("RED")))
+            else if ((robot.sensorColorLeft.blue() <= 3) && (Configuration.ALLIANCE.equals("RED")))
             {
                 // Blue beacon found, need to press button
-                telemetry.addData("SenseBeacon", "> > Blue Found: " + robot.sensorColor.blue());
+                telemetry.addData("SenseBeacon", "> > Blue Found: " + robot.sensorColorLeft.blue());
                 telemetry.update();
+
+                //wait 5 seconds before determining whether to drive forward again (wrong color)
+                sleep(5000);
+
                 // Drive forward 3 inches with the sensor arm extended
                 EncoderDrive(robot, Configuration.APPROACH_SPEED, 3, 3, 1.0);
                 //Back off button
                 EncoderDrive(robot,-Configuration.APPROACH_SPEED,3,3,1.0);
             }
-            //wait 5 seconds before determining whether to drive forward again (wrong color)
-            sleep(5000);
 
             idle();
         }
-
-        //robot.servoButtonArm.setPosition(Configuration.START_BUTTON_POS);
 
         telemetry.addData("SenseBeacon", "Beacon Sensing Complete!");
         telemetry.update();

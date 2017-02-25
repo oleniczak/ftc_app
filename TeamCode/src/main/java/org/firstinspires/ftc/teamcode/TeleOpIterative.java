@@ -116,7 +116,7 @@ public class TeleOpIterative extends OpMode
         if (gamepad1.b)
         {
   //          robot.servoBallGate.setPosition(Configuration.OPEN_BALL_GATE_POS);
-            cmds.DropAndShoot(robot);
+            cmds.Shoot(robot);
         }
 //        else
  //       {

@@ -58,9 +58,9 @@ class SR_Auto_Mild extends LinearOpMode
         //Use delay until ball launch is ready for use
         //sleep(Configuration.AUTO_DELAY_TIME);
 
-        cmds.DropAndShoot(robot);
+        cmds.Shoot(robot);
 
-        cmds.DropAndShoot(robot);
+        cmds.Shoot(robot);
 
 //        robot.motorLaunch.setPower(0);
 

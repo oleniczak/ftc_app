@@ -19,22 +19,27 @@ public class Hardware
     private Telemetry telemetry;
     private HardwareMap hwMap = null;
 
-    DcMotor motorFrontLeft=null;
-    DcMotor motorBackLeft=null;
-    DcMotor motorFrontRight=null;
-    DcMotor motorBackRight=null;
+    //Motors
+        DcMotor motorFrontLeft=null;
+        DcMotor motorBackLeft=null;
+        DcMotor motorFrontRight=null;
+        DcMotor motorBackRight=null;
 
-//    DcMotor motorLaunch=null;
-//    DcMotor motorLift=null;
-//    DcMotor motorCollect=null;
+        DcMotor motorLaunch=null;
 
-//    Servo servoBallGate=null;
-    //Servo servoForkLeft=null;
-    //Servo servoForkRight=null;
-    //Servo servoButtonArm=null;
+        DcMotor motorCollect=null;
 
-    ModernRoboticsI2cGyro sensorGyro=null;
-    ModernRoboticsI2cColorSensor sensorColor=null;
+        DcMotor motorLiftLeft=null;
+        DcMotor motorLiftRight=null;
+
+    //Servos
+        Servo servoLift=null;
+
+    //Sensors
+        ModernRoboticsI2cGyro sensorGyro=null;
+
+        ModernRoboticsI2cColorSensor sensorColorLeft=null;
+        ModernRoboticsI2cColorSensor sensorColorRight=null;
 
     /* Constructor */
     public Hardware(Telemetry telemetry)
@@ -50,35 +55,30 @@ public class Hardware
 
         hwMap = ahwMap;
 
-        /* ******************************************************/
+        /*
+        * Tie the hardware variables to the hardware defined in the FTC Robot Controller app on the phone.
+        */
+
         // Define Motors
-        /* ******************************************************/
-         /* eg: Initialize the hardware variables. Note that the strings used here as parameters
-         * to 'get' must correspond to the names assigned during the robot configuration
-         * step (using the FTC Robot Controller app on the phone).
-         */
-        motorFrontLeft = hwMap.dcMotor.get("front_left");
-        motorFrontRight = hwMap.dcMotor.get("front_right");
-        motorBackLeft = hwMap.dcMotor.get("back_left");
-        motorBackRight = hwMap.dcMotor.get("back_right");
+            motorFrontLeft = hwMap.dcMotor.get("front_left");
+            motorBackLeft = hwMap.dcMotor.get("back_left");
+            motorFrontRight = hwMap.dcMotor.get("front_right");
+            motorBackRight = hwMap.dcMotor.get("back_right");
 
-//        motorLaunch = hwMap.dcMotor.get("launch");
-//        motorLift = hwMap.dcMotor.get("lift");
-//        motorCollect = hwMap.dcMotor.get("collect");
+            motorLaunch = hwMap.dcMotor.get("launch");
 
-        /* ******************************************************/
+            motorCollect = hwMap.dcMotor.get("collect");
+
+            motorLiftLeft = hwMap.dcMotor.get("lift_left");
+            motorLiftRight = hwMap.dcMotor.get("lift_right");
+
         // Define Servos
-        /* ******************************************************/
-//        servoBallGate = hwMap.servo.get("gate");
-//        servoForkLeft = hwMap.servo.get("fork");
-//        servoForkRight = hwMap.servo.get("fork1");
-//        servoButtonArm = hwMap.servo.get("button");
+            servoLift = hwMap.servo.get("fork");
 
-        /* ******************************************************/
         // Define Sensors
-        /* ******************************************************/
-        sensorGyro = (ModernRoboticsI2cGyro) hwMap.gyroSensor.get("gyro");
-//        sensorColor = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
+            sensorGyro = (ModernRoboticsI2cGyro) hwMap.gyroSensor.get("gyro");
+            sensorColorLeft = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
+            sensorColorRight = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
 
         telemetry.addData("Hardware", "Hardware Definition Complete!");
         telemetry.update();
