@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /*
@@ -9,7 +10,7 @@ FUNCTION:
 */
 
 @Autonomous(name="Mild Gyro Drive (Config Alliance & Position)", group="Autonomous")
-//@Disabled
+@Disabled
 class SR_Auto_Mild_with_Gyro_Drive extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
@@ -57,9 +58,9 @@ class SR_Auto_Mild_with_Gyro_Drive extends LinearOpMode
         //turn on launch motor
 //        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
 
-        cmds.DropAndShoot(robot);
+        cmds.Shoot(robot);
 
-        cmds.DropAndShoot(robot);
+        cmds.Shoot(robot);
 
 //        robot.motorLaunch.setPower(0);
 

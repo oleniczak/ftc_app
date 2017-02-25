@@ -37,9 +37,9 @@ class SR_Auto_Spicey_No_Gyro extends LinearOpMode {
         //turn on launch motor
 //        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
 
-        cmds.DropAndShoot(robot);
+        cmds.Shoot(robot);
 
-        cmds.DropAndShoot(robot);
+        cmds.Shoot(robot);
 
 //        robot.motorLaunch.setPower(0);
 

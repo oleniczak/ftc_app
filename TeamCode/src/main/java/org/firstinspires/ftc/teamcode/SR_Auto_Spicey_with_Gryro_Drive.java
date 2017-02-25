@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /**
@@ -8,7 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  */
 
 @Autonomous(name="Spicey Gyro Drive(Config Alliance & Position)", group="Autonomous")
-//@Disabled
+@Disabled
 class SR_Auto_Spicey_with_Gryro_Drive extends LinearOpMode {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
@@ -38,9 +39,9 @@ class SR_Auto_Spicey_with_Gryro_Drive extends LinearOpMode {
         //turn on launch motor
 //        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
 
-        cmds.DropAndShoot(robot);
+        cmds.Shoot(robot);
 
-        cmds.DropAndShoot(robot);
+        cmds.Shoot(robot);
 
 //        robot.motorLaunch.setPower(0);
 

@@ -26,8 +26,8 @@ public class TeleOpIterative extends OpMode
     private double LiftY;
     private double LaunchY;
 
-    private double CollectLT;
-    private double CollectUT;
+    private double Collect;
+//    private double CollectUT;
 
     /* Code to run ONCE when the driver hits INIT */
     @Override
@@ -60,8 +60,6 @@ public class TeleOpIterative extends OpMode
         telemetry.update();
 
         runtime.reset();
-
-//        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
     }
 
     /* Code to run REPEATEDLY after the driver hits PLAY but before they hit STOP */
@@ -71,57 +69,46 @@ public class TeleOpIterative extends OpMode
         telemetry.addData("Status", "Running: " + runtime.toString());
         telemetry.update();
 
-        //Run wheels in tank mode (note: The joystick goes negative when pushed forwards)
-        //Main Driver - Drive motor controls
-        LeftFY = -gamepad1.left_stick_y;
-        LeftBY = -gamepad1.left_stick_y;
-        RightFY = -gamepad1.right_stick_y;
-        RightBY = -gamepad1.right_stick_y;
+        //Give buttons a variable name
+            LeftFY = -gamepad1.left_stick_y;
+            LeftBY = -gamepad1.left_stick_y;
+            RightFY = -gamepad1.right_stick_y;
+            RightBY = -gamepad1.right_stick_y;
 
-        robot.motorFrontLeft.setPower(LeftFY);
-        robot.motorFrontRight.setPower(RightFY);
-        robot.motorBackLeft.setPower(LeftBY);
-        robot.motorBackRight.setPower(RightBY);
+            Collect = gamepad1.right_trigger -gamepad1.left_trigger;
+//          CollectUT = gamepad1.right_trigger -gamepad1.left_trigger;
 
-        //Main Driver - Ball collect motor controls
-        CollectLT = gamepad1.right_trigger -gamepad1.left_trigger;
-        //CollectUT = gamepad1.right_trigger -gamepad1.left_trigger;
+            LaunchY = gamepad2.right_stick_y;
+            LiftY = gamepad2.left_stick_y;
 
-//        robot.motorCollect.setPower(CollectLT);
-        //robot.motorCollectUpper.setPower(CollectUT);
+        //Apply button settings to robot
+            robot.motorFrontLeft.setPower(LeftFY);
+            robot.motorFrontRight.setPower(RightFY);
+            robot.motorBackLeft.setPower(LeftBY);
+            robot.motorBackRight.setPower(RightBY);
 
-        //Alternate Driver  - Fork lift motor controls
-        LiftY = gamepad2.left_stick_y;
+            robot.motorCollect.setPower(Collect);
 
-        //robot.motorLift.setPower(LiftY);
+            robot.motorLaunch.setPower(LaunchY);
 
-        //Alternate Driver - Ball launch motor controls
-        LaunchY = gamepad2.right_stick_y;
-
-//        robot.motorLaunch.setPower(LaunchY);
+            robot.motorLiftLeft.setPower(LiftY);
+            robot.motorLiftRight.setPower(LiftY);
 
 
         //Main driver - servo controls
-//        if (gamepad1.right_bumper)
-//        {
-//            robot.servoForkLeft.setPosition(Configuration.OPEN_FORK_SERVO_POS);
-//            robot.servoForkRight.setPosition(Configuration.OPEN_FORK_SERVO_POS);
-//        }
-//        else
-//        {
-//            robot.servoForkLeft.setPosition(Configuration.CLOSED_FORK_SERVO_POS);
-//            robot.servoForkRight.setPosition(Configuration.CLOSED_FORK_SERVO_POS);
-//        }
-
-        if (gamepad1.b)
+        if (gamepad1.right_bumper)
         {
-  //          robot.servoBallGate.setPosition(Configuration.OPEN_BALL_GATE_POS);
+            robot.servoLift.setPosition(Configuration.OPEN_LIFT_SERVO_POS);
+        }
+        else
+        {
+            robot.servoLift.setPosition(Configuration.CLOSED_LIFT_SERVO_POS);
+        }
+
+        if (gamepad2.b)
+        {
             cmds.Shoot(robot);
         }
-//        else
- //       {
- //           robot.servoBallGate.setPosition(Configuration.CLOSED_BALL_GATE_POS);
- //       }
 
         //Alternate driver - servo controls
 //        if (gamepad2.x)
@@ -133,11 +120,6 @@ public class TeleOpIterative extends OpMode
 //            cmds.DisarmBeaconArm(robot);
 //        }
 
-        //Alternate Driver - One button push to launch ball
-//        if (gamepad2.b)
-//        {
-//            cmds.LaunchBallAndReset(robot, Configuration.LAUNCH_POWER);
-//        }
 
         // Pause for metronome tick.  40 mS each cycle = update 25 times a second.
         //cmds.waitForTick(40);
