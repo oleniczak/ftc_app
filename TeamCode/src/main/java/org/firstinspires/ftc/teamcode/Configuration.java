@@ -8,7 +8,8 @@ import java.util.Properties;
 
 /*
 PURPOSE:
-    Loads configurations constants from configproperties.txt
+    Sets variables with constant values.  Values here are overriden by configproperties.txt (on phone).
+    All variables read with getProperies MUST be set in configproperties.
 */
 
 public class Configuration
@@ -25,40 +26,38 @@ public class Configuration
     public static String ALLIANCE = "RED";
     public static String START_POSITION = "LONG";
 
+    //*****************************************
+    //Phone configurable settings:
+    //*****************************************
     //Motor Power
-        public static double DRIVE_POWER = 0.2;
+        public static double DRIVE_POWER = 0.6;
         public static double TURN_POWER = 0.2;
-        public static double APPROACH_SPEED = 0.2;
         public static double LAUNCH_POWER = 0.55;
+        public static double APPROACH_SPEED = 0.25;
 
     //Servo Positions
         public static double CLOSED_LIFT_SERVO_POS = 1.0;
         public static double OPEN_LIFT_SERVO_POS = 0.4;
 
     //Time Settings
-        public static int AUTO_DELAY_TIME = 0000;
-
+        public static int AUTO_DELAY_TIME = 0;
         public static int LAUNCH_TIME = 5000;
-//      public static int LONG_AUTO_DRIVE_TIME = 3000;
-//      public static int SHORT_AUTO_DRIVE_TIME = 1500;
-//      public static int NINETY_DEGREE_TURN_TIME = 100;
 
     //Measurement Settings
-        public static double LONG_DIST_TO_SHOOT =20.0;
-        public static double SHORT_DIST_TO_SHOOT =6.0;
-        public static double LONG_DIST_TO_PARK =20.0;
-        public static double SHORT_DIST_TO_PARK =20.0;
-
+        public static double LONG_DIST_TO_SHOOT =10.0;
+        public static double SHORT_DIST_TO_SHOOT =0.0;
+        public static double LONG_DIST_TO_PARK =72.0;
+        public static double SHORT_DIST_TO_PARK =60.0;
         public static double NINETY_DEGREE_TURN_INCHES = 9.0;
-    //  public static double LONG_AUTO_DRIVE_INCHES = 48;
-    //  public static double SHORT_AUTO_DRIVE_INCHES = 36;
 
+    //*****************************************
+    //Variables below are not available to be configured from phone
+    //*****************************************
         private static double COUNTS_PER_MOTOR_REV = 1120;
         private static double DRIVE_GEAR_REDUCTION = 0.3;
         private static double WHEEL_DIAMETER_INCHES = 4.0;
         public static double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.141592652589);
 
-    //Heading Settings
         public static final double     HEADING_THRESHOLD       = 1 ;      // As tight as we can make it with an integer gyro
         public static final double     P_TURN_COEFF            = 0.1;     // Larger is more responsive, but also less stable
         public static final double     P_DRIVE_COEFF           = 0.15;     // Larger is more responsive, but also less stable
@@ -90,26 +89,21 @@ public class Configuration
 
             DRIVE_POWER = Double.parseDouble(properties.getProperty("DRIVE_POWER"));
             TURN_POWER = Double.parseDouble(properties.getProperty("TURN_POWER"));
-            APPROACH_SPEED = Double.parseDouble(properties.getProperty("APPROACH_SPEED"));
             LAUNCH_POWER = Double.parseDouble(properties.getProperty("LAUNCH_POWER"));
+            APPROACH_SPEED = Double.parseDouble(properties.getProperty("APPROACH_SPEED"));
 
             CLOSED_LIFT_SERVO_POS = Double.parseDouble(properties.getProperty("CLOSED_LIFT_SERVO_POS"));
             OPEN_LIFT_SERVO_POS = Double.parseDouble(properties.getProperty("OPEN_LIFT_SERVO_POS"));
-//
+
             AUTO_DELAY_TIME = Integer.parseInt(properties.getProperty("AUTO_DELAY_TIME"));
             LAUNCH_TIME = Integer.parseInt(properties.getProperty("LAUNCH_TIME"));
-//            LONG_AUTO_DRIVE_TIME = Integer.parseInt(properties.getProperty("LONG_AUTO_DRIVE_TIME"));
-//            SHORT_AUTO_DRIVE_TIME = Integer.parseInt(properties.getProperty("SHORT_AUTO_DRIVE_TIME"));
-//            NINETY_DEGREE_TURN_TIME = Integer.parseInt(properties.getProperty("NINETY_DEGREE_TURN_TIME"));
 
             LONG_DIST_TO_SHOOT = Double.parseDouble(properties.getProperty("LONG_DIST_TO_SHOOT"));
-            LONG_DIST_TO_PARK = Double.parseDouble(properties.getProperty("LONG_DIST_TO_PARK"));
             SHORT_DIST_TO_SHOOT = Double.parseDouble(properties.getProperty("SHORT_DIST_TO_SHOOT"));
+            LONG_DIST_TO_PARK = Double.parseDouble(properties.getProperty("LONG_DIST_TO_PARK"));
             SHORT_DIST_TO_PARK = Double.parseDouble(properties.getProperty("SHORT_DIST_TO_PARK"));
 
             NINETY_DEGREE_TURN_INCHES = Integer.parseInt(properties.getProperty("NINETY_DEGREE_TURN_INCHES"));
-//            LONG_AUTO_DRIVE_INCHES = Integer.parseInt(properties.getProperty("LONG_AUTO_DRIVE_INCHES"));
-//            SHORT_AUTO_DRIVE_INCHES = Integer.parseInt(properties.getProperty("SHORT_AUTO_DRIVE_INCHES"));
 
         //in.close();
 

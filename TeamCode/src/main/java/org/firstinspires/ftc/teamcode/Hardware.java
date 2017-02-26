@@ -10,7 +10,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 /*
 PURPOSE:
-    Identifies hardware components
+    Tie the hardware variables to the hardware defined in the FTC Robot Controller app on the phone.
 */
 
 public class Hardware
@@ -38,8 +38,7 @@ public class Hardware
     //Sensors
         ModernRoboticsI2cGyro sensorGyro=null;
 
-        ModernRoboticsI2cColorSensor sensorColorLeft=null;
-        ModernRoboticsI2cColorSensor sensorColorRight=null;
+        ModernRoboticsI2cColorSensor sensorColor=null;
 
     /* Constructor */
     public Hardware(Telemetry telemetry)
@@ -54,10 +53,6 @@ public class Hardware
         telemetry.update();
 
         hwMap = ahwMap;
-
-        /*
-        * Tie the hardware variables to the hardware defined in the FTC Robot Controller app on the phone.
-        */
 
         // Define Motors
             motorFrontLeft = hwMap.dcMotor.get("front_left");
@@ -77,8 +72,7 @@ public class Hardware
 
         // Define Sensors
             sensorGyro = (ModernRoboticsI2cGyro) hwMap.gyroSensor.get("gyro");
-            //sensorColorLeft = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
-            //sensorColorRight = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
+            //sensorColor = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
 
         telemetry.addData("Hardware", "Hardware Definition Complete!");
         telemetry.update();

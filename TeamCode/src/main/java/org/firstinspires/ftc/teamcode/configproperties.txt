@@ -1,50 +1,31 @@
 ALLIANCE = RED
 START_POSITION = LONG
-AUTO_DELAY_TIME = 00000
 DRIVE_POWER = 0.6
-TURN_POWER = 0.5
+TURN_POWER = 0.2
 LAUNCH_POWER = 0.55
 APPROACH_SPEED = 0.25
 CLOSED_LIFT_SERVO_POS = 1.0
 OPEN_LIFT_SERVO_POS = 0.4
-LONG_DIST_TO_SHOOT = 20.0
-SHORT_DIST_TO_SHOOT = 6.0
-LONG_DIST_TO_PARK = 20.0
-SHORT_DIST_TO_PARK = 20.0
-NINETY_DEGREE_TURN_INCHES = 9
-LONG_AUTO_DRIVE_INCHES = 48
-SHORT_AUTO_DRIVE_INCHES = 36
+AUTO_DELAY_TIME = 0
 LAUNCH_TIME = 5000
+LONG_DIST_TO_SHOOT = 10.0
+SHORT_DIST_TO_SHOOT = 0.0
+LONG_DIST_TO_PARK = 72.0
+SHORT_DIST_TO_PARK = 60.0
+NINETY_DEGREE_TURN_INCHES = 9
 
-#CLOSED_BALL_GATE_POS = 0.7
-#OPEN_BALL_GATE_POS = 0.0
-#CLOSED_FORK_SERVO_POS = 1.0
-#OPEN_FORK_SERVO_POS = 0.4
-#START_BUTTON_POS = 1.0
-#DETECTION_BUTTON_POS = 0.6
-#BALL_GATE_OPEN_TIME = 2000
-#LAUNCH_TIME = 1000
-#LONG_AUTO_DRIVE_TIME = 3000
-#SHORT_AUTO_DRIVE_TIME = 1500
-#NINETY_DEGREE_TURN_TIME = 100
 #ALLIANCE:              RED or BLUE
 #START_POSITION:        LONG or SHORT
+#AUTO_DELAY_TIME:       Motor-time:  Time to delay in autonomous to prevent penalty if crossing line
+#LAUNCH_TIME            Motor-tim:  Time to power motor to launch ball
 #DRIVE_POWER:           Motor-power:  Drive speed
 #TURN_POWER:            Motor-power:  Turn power
 #LAUNCH_POWER:          Motor-power:  Ball launch power
 #APPROACH_SPEED:        Motor-power:  Tank power to approach beacon
-#CLOSED_BALL_GATE_POS:  Servo:  Ball gate closed position
-#OPEN_BALL_GATE_POS:    Servo:  Ball gate open position
-#CLOSED_FORK_SERVO_POS: Servo:  Fork closed position
-#OPEN_FORK_SERVO_POS:   Servo:  Fork open position
-#START_BUTTON_POS:      Servo:  Sensor arm start position
-#DETECTION_BUTTON_POS:  Servo:  Sensor arm ready to detect position
-#BALL_GATE_OPEN_TIME:   Motor-time:  Time to run motor to open ball gate
-#LAUNCH_TIME:           Motor-time:  Time to run motor to launch ball
-#LONG_AUTO_DRIVE_TIME:  Motor-time:  Time to run motor from long position to center park
-#SHORT_AUTO_DRIVE_TIME: Motor-time:  Time to run motor from short position to center park
-#NINETY_DEGREE_TURN_TIME:  Motor-time: Time to run motor for 90 degree Autonomous turn
-#AUTO_DELAY_TIME:       Motor-time:  Time to delay in autonomous to prevent penalty if crossing line
-#NINETY_DEGREE_TURN_INCHES:  Specs: Number inches to turn for a 90 degree turn
-#LONG_AUTO_DRIVE_INCHES:    Specs:  Number of inches from LONG position to center park
-#SHORT_AUTO_DRIVE_INCHES:   Specs:  Number of inches from SHORT position to center park
+#CLOSED_LIFT_SERVO_POS  Servo: Closed position
+#OPEN_LIFT_SERVO_POS    Servo:  Open (drop) position
+#LONG_DIST_TO_SHOOT     Distance:   Inches to drive from LONG position before shooting ball
+#SHORT_DIST_TO_SHOOT    Distance:   Inches to drive from SHORT position before shooting ball
+#LONG_DIST_TO_PARK      Distance:   Inches to drive from after shooting when starting in LONG position
+#SHORT_DIST_TO_PARK     Distance:   Inches to drive from after shooting when starting in SHORT position
+#NINETY_DEGREE_TURN_INCHES  Distance:  Inches to turn wheels for 90 degree turn
