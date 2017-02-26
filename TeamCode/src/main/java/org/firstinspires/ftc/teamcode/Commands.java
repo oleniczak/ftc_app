@@ -30,8 +30,6 @@ public class Commands extends LinearOpMode
     }
 
     public void InitializeHW(Hardware robot) {
-        //robot.DefineHardware(hardwareMap);
-
         telemetry.addData("InitializeHW", "Beginning HW Initialization...");
         telemetry.update();
 

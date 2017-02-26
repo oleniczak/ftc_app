@@ -52,8 +52,8 @@ public class Configuration
         public static double NINETY_DEGREE_TURN_INCHES = 9.0;
     //  public static double LONG_AUTO_DRIVE_INCHES = 48;
     //  public static double SHORT_AUTO_DRIVE_INCHES = 36;
-        private static double COUNTS_PER_MOTOR_REV = 1120;
 
+        private static double COUNTS_PER_MOTOR_REV = 1120;
         private static double DRIVE_GEAR_REDUCTION = 0.3;
         private static double WHEEL_DIAMETER_INCHES = 4.0;
         public static double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.141592652589);
@@ -62,7 +62,6 @@ public class Configuration
         public static final double     HEADING_THRESHOLD       = 1 ;      // As tight as we can make it with an integer gyro
         public static final double     P_TURN_COEFF            = 0.1;     // Larger is more responsive, but also less stable
         public static final double     P_DRIVE_COEFF           = 0.15;     // Larger is more responsive, but also less stable
-
 
     /* Constructor */
     public Configuration(Telemetry telemetry)
