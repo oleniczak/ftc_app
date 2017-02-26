@@ -52,13 +52,11 @@ public class SR_Auto_Mild extends LinearOpMode
             cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_DIST_TO_SHOOT, Configuration.SHORT_DIST_TO_SHOOT, 5.0);
         }
 
-        //turn on launch motor
-//        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
+        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
 
         //Use delay until ball launch is ready for use
-        //sleep(Configuration.AUTO_DELAY_TIME);
+        sleep(500);
 
-        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
         robot.motorCollect.setPower(1.0);
 
         cmds.Shoot(robot);
