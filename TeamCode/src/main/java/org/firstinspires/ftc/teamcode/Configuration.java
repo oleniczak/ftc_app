@@ -23,7 +23,7 @@ public class Configuration
     //settings will still take place.  The configproperties.txt would/should override these defaults.
 
     public static String ALLIANCE = "RED";
-    public static String START_POSITION = "SHORT";
+    public static String START_POSITION = "LONG";
 
     //Motor Power
         public static double DRIVE_POWER = 0.2;

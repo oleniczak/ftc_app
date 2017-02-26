@@ -9,7 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 @Autonomous(name="Spicey No Gyro (Config Alliance & Position)", group="Autonomous")
 //@Disabled
-class SR_Auto_Spicey_No_Gyro extends LinearOpMode {
+public class SR_Auto_Spicey_No_Gyro extends LinearOpMode {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
     private Commands cmds = new Commands(telemetry);

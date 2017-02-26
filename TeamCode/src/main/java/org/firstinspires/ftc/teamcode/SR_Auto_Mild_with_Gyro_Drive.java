@@ -11,7 +11,7 @@ FUNCTION:
 
 @Autonomous(name="Mild Gyro Drive (Config Alliance & Position)", group="Autonomous")
 @Disabled
-class SR_Auto_Mild_with_Gyro_Drive extends LinearOpMode
+public class SR_Auto_Mild_with_Gyro_Drive extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);

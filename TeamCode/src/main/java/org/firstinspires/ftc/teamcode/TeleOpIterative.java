@@ -82,8 +82,8 @@ public class TeleOpIterative extends OpMode
 
         //Apply button settings to robot
             robot.motorFrontLeft.setPower(LeftFY);
-            robot.motorFrontRight.setPower(RightFY);
             robot.motorBackLeft.setPower(LeftBY);
+            robot.motorFrontRight.setPower(RightFY);
             robot.motorBackRight.setPower(RightBY);
 
             robot.motorCollect.setPower(Collect);

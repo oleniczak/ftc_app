@@ -81,14 +81,14 @@ public class Commands extends LinearOpMode
         robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //since not reset, position doesn't mean anything - telemetry only ensures they are being read
-        telemetry.addData
-                ("InitializeHW", "> > Starting at %7d :%7d :%7d :%7d",
-                        robot.motorFrontLeft.getCurrentPosition(),
-                        robot.motorFrontRight.getCurrentPosition(),
-                        robot.motorBackLeft.getCurrentPosition(),
-                        robot.motorBackRight.getCurrentPosition()
-                );
-        telemetry.update();
+        //telemetry.addData
+        //        ("InitializeHW", "> > Starting at %7d :%7d :%7d :%7d",
+        //                robot.motorFrontLeft.getCurrentPosition(),
+        //                robot.motorFrontRight.getCurrentPosition(),
+        //                robot.motorBackLeft.getCurrentPosition(),
+        //                robot.motorBackRight.getCurrentPosition()
+        //        );
+        //telemetry.update();
 
         telemetry.addData("InitializeHW", "> Resetting Encoders Complete!");
         telemetry.update();
@@ -159,22 +159,17 @@ public class Commands extends LinearOpMode
         telemetry.addData("EncoderDrive", "EncoderDrive Starting...");
         telemetry.update();
 
-//        robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-//        idle();
-//
+
 //        robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //        robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //        robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 //        robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Ensure that the opmode is still active
-       // if (opModeIsActive())
-       // {
-
+        if (opModeIsActive())
+        {
             //telemetry.addData("Debug", "%7d",Configuration.COUNTS_PER_INCH);
+            System.out.println(Configuration.COUNTS_PER_INCH);
 
             // Calculate new target position
             newLeftFrontTarget = robot.motorFrontLeft.getCurrentPosition() + (int) (leftInches * Configuration.COUNTS_PER_INCH);
@@ -203,7 +198,7 @@ public class Commands extends LinearOpMode
             robot.motorBackRight.setPower(speed);
 
             // keep looping while we are still active, and there is time left, and both motors are running.
-            while ( //opModeIsActive() &&
+            while ( opModeIsActive() &&
                     runtime.seconds() < timeoutS &&
                     robot.motorFrontLeft.isBusy() &&
                     robot.motorFrontRight.isBusy() &&
@@ -231,8 +226,14 @@ public class Commands extends LinearOpMode
             robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
             robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+            robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            idle();
+
             //  sleep(250);   // optional pause after each move
-        //}
+        }
         telemetry.addData("EncoderDrive", "EncoderDrive Complete!");
         telemetry.update();
     }
