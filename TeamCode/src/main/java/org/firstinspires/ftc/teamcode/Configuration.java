@@ -38,16 +38,22 @@ public class Configuration
     //Time Settings
         public static int AUTO_DELAY_TIME = 0000;
 
-        public static int LAUNCH_TIME = 2000;
+        public static int LAUNCH_TIME = 5000;
 //      public static int LONG_AUTO_DRIVE_TIME = 3000;
 //      public static int SHORT_AUTO_DRIVE_TIME = 1500;
 //      public static int NINETY_DEGREE_TURN_TIME = 100;
 
     //Measurement Settings
+        public static double LONG_DIST_TO_SHOOT =20.0;
+        public static double SHORT_DIST_TO_SHOOT =6.0;
+        public static double LONG_DIST_TO_PARK =20.0;
+        public static double SHORT_DIST_TO_PARK =20.0;
+
         public static double NINETY_DEGREE_TURN_INCHES = 9.0;
     //  public static double LONG_AUTO_DRIVE_INCHES = 48;
     //  public static double SHORT_AUTO_DRIVE_INCHES = 36;
         private static double COUNTS_PER_MOTOR_REV = 1120;
+
         private static double DRIVE_GEAR_REDUCTION = 0.3;
         private static double WHEEL_DIAMETER_INCHES = 4.0;
         public static double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.141592652589);
@@ -69,16 +75,16 @@ public class Configuration
         telemetry.addData("Configuration", "Begin Loading Parameters...");
         telemetry.update();
 
-//        try
-//        {
+        try
+        {
             //* Keep for troubleshooting
             //System.out.println(System.getenv());
             //System.out.println(Environment.getExternalStorageDirectory());
 
             // ** Requires configproperties.xt to reside in root of Phone/FIRST directory (next to 9019.xml file) **
-            //FileInputStream in = new FileInputStream("/storage/emulated/0/FIRST/configproperties.txt");
+            FileInputStream in = new FileInputStream("/storage/emulated/0/FIRST/configproperties.txt");
 
-            //properties.load(in);
+            properties.load(in);
 
             ALLIANCE = properties.getProperty("ALLIANCE");
             START_POSITION = properties.getProperty("START_POSITION");
@@ -97,6 +103,11 @@ public class Configuration
 //            SHORT_AUTO_DRIVE_TIME = Integer.parseInt(properties.getProperty("SHORT_AUTO_DRIVE_TIME"));
 //            NINETY_DEGREE_TURN_TIME = Integer.parseInt(properties.getProperty("NINETY_DEGREE_TURN_TIME"));
 
+            LONG_DIST_TO_SHOOT = Double.parseDouble(properties.getProperty("LONG_DIST_TO_SHOOT"));
+            LONG_DIST_TO_PARK = Double.parseDouble(properties.getProperty("LONG_DIST_TO_PARK"));
+            SHORT_DIST_TO_SHOOT = Double.parseDouble(properties.getProperty("SHORT_DIST_TO_SHOOT"));
+            SHORT_DIST_TO_PARK = Double.parseDouble(properties.getProperty("SHORT_DIST_TO_PARK"));
+
             NINETY_DEGREE_TURN_INCHES = Integer.parseInt(properties.getProperty("NINETY_DEGREE_TURN_INCHES"));
 //            LONG_AUTO_DRIVE_INCHES = Integer.parseInt(properties.getProperty("LONG_AUTO_DRIVE_INCHES"));
 //            SHORT_AUTO_DRIVE_INCHES = Integer.parseInt(properties.getProperty("SHORT_AUTO_DRIVE_INCHES"));
@@ -106,11 +117,11 @@ public class Configuration
             // * Keep for troubleshooting *
             //System.out.println(properties.getProperty("DRIVE_POWER"));
 
-//        }
-//        catch (IOException e)
-//        {
-//            e.printStackTrace();
-//        }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
 
         telemetry.addData("Configuration", "Loading Parameters Complete!");
         telemetry.update();

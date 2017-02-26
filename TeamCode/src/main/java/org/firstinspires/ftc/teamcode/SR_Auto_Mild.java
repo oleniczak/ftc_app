@@ -10,7 +10,7 @@ FUNCTION:
 
 @Autonomous(name="Mild no Gyro (Config Alliance & Position)", group="Autonomous")
 //@Disabled
-class SR_Auto_Mild extends LinearOpMode
+public class SR_Auto_Mild extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
@@ -45,11 +45,11 @@ class SR_Auto_Mild extends LinearOpMode
         //Move close enough to shoot balls
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 36, 36, 5.0);
+            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_DIST_TO_SHOOT, Configuration.LONG_DIST_TO_SHOOT, 5.0);
         }
         else //SHORT
         {
-            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 6, 6, 5.0);
+            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_DIST_TO_SHOOT, Configuration.SHORT_DIST_TO_SHOOT, 5.0);
         }
 
         //turn on launch motor
@@ -58,22 +58,23 @@ class SR_Auto_Mild extends LinearOpMode
         //Use delay until ball launch is ready for use
         //sleep(Configuration.AUTO_DELAY_TIME);
 
-        cmds.Shoot(robot);
+        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
+        robot.motorCollect.setPower(1.0);
 
         cmds.Shoot(robot);
+        //cmds.Shoot(robot);
 
-//        robot.motorLaunch.setPower(0);
+        robot.motorCollect.setPower(0);
 
         //Drive to center
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 60, 60, 5.0);
+            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_DIST_TO_PARK, Configuration.LONG_DIST_TO_PARK, 5.0);
         }
-        else //SHORT
+        else
         {
-            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 40, 40, 5.0);
+            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_DIST_TO_PARK, Configuration.SHORT_DIST_TO_PARK, 5.0);
         }
-
         cmds.StopDriving(robot);
 
         telemetry.addData("Status","Autonomous Complete!");

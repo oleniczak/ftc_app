@@ -76,7 +76,6 @@ public class TeleOpIterative extends OpMode
             RightBY = -gamepad1.right_stick_y;
 
             Collect = gamepad1.right_trigger -gamepad1.left_trigger;
-//          CollectUT = gamepad1.right_trigger -gamepad1.left_trigger;
 
             LaunchY = gamepad2.right_stick_y;
             LiftY = gamepad2.left_stick_y;

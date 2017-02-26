@@ -65,7 +65,7 @@ public class Hardware
             motorFrontRight = hwMap.dcMotor.get("front_right");
             motorBackRight = hwMap.dcMotor.get("back_right");
 
-            motorLaunch = hwMap.dcMotor.get("launch");
+            motorLaunch = hwMap.dcMotor.get("shoot");
 
             motorCollect = hwMap.dcMotor.get("collect");
 
@@ -77,8 +77,8 @@ public class Hardware
 
         // Define Sensors
             sensorGyro = (ModernRoboticsI2cGyro) hwMap.gyroSensor.get("gyro");
-            sensorColorLeft = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
-            sensorColorRight = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
+            //sensorColorLeft = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
+            //sensorColorRight = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
 
         telemetry.addData("Hardware", "Hardware Definition Complete!");
         telemetry.update();
