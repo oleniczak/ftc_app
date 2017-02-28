@@ -1,6 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /**
@@ -8,7 +9,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  */
 
 @Autonomous(name="Spicey No Gyro (Config Alliance & Position)", group="Autonomous")
-//@Disabled
+@Disabled
 public class SR_Auto_Spicey_No_Gyro extends LinearOpMode {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);

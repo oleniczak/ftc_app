@@ -46,7 +46,7 @@ public class Configuration
     //Measurement Settings
         public static double LONG_DIST_TO_SHOOT =10.0;
         public static double SHORT_DIST_TO_SHOOT =0.0;
-        public static double LONG_DIST_TO_PARK =72.0;
+        public static double LONG_DIST_TO_PARK =15.0; //72
         public static double SHORT_DIST_TO_PARK =60.0;
         public static double NINETY_DEGREE_TURN_INCHES = 9.0;
 
@@ -54,7 +54,7 @@ public class Configuration
     //Variables below are not available to be configured from phone
     //*****************************************
         private static double COUNTS_PER_MOTOR_REV = 1120;
-        private static double DRIVE_GEAR_REDUCTION = 0.3;
+        private static double DRIVE_GEAR_REDUCTION = 0.397;
         private static double WHEEL_DIAMETER_INCHES = 4.0;
         public static double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.141592652589);
 
