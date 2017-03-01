@@ -37,7 +37,6 @@ public class Hardware
 
     //Sensors
         ModernRoboticsI2cGyro sensorGyro=null;
-
         ModernRoboticsI2cColorSensor sensorColor=null;
 
     /* Constructor */

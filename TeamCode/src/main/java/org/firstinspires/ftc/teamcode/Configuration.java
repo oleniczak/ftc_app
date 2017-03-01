@@ -64,7 +64,7 @@ public class Configuration
 
         public static final double     HEADING_THRESHOLD       = 1 ;      // As tight as we can make it with an integer gyro
         public static final double     P_TURN_COEFF            = 0.1;     // Larger is more responsive, but also less stable
-        public static final double     P_DRIVE_COEFF           = 0.15;     // Larger is more responsive, but also less stable
+        public static final double     P_DRIVE_COEFF           = 0.15;    // Larger is more responsive, but also less stable
 
     /* Constructor */
     public Configuration(Telemetry telemetry)
@@ -82,6 +82,7 @@ public class Configuration
             //* Keep for troubleshooting
             //System.out.println(System.getenv());
             //System.out.println(Environment.getExternalStorageDirectory());
+            //System.out.println(properties.getProperty("DRIVE_POWER"));
 
             // ** Requires configproperties.xt to reside in root of Phone/FIRST directory (next to 9019.xml file) **
             FileInputStream in = new FileInputStream("/storage/emulated/0/FIRST/configproperties.txt");
@@ -110,11 +111,7 @@ public class Configuration
             LONG_FIRST_BEACON_AIM_DIST = Double.parseDouble(properties.getProperty("LONG_FIRST_BEACON_AIM_DIST"));
             LONG_FIRST_BEACON_DIST = Double.parseDouble(properties.getProperty("LONG_FIRST_BEACON_DIST"));
 
-        //in.close();
-
-            // * Keep for troubleshooting *
-            //System.out.println(properties.getProperty("DRIVE_POWER"));
-
+            in.close();
         }
         catch (IOException e)
         {

@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 /*
@@ -41,6 +42,12 @@ public class TeleOpIterative extends OpMode
         configs.loadParameters();
 
         cmds.InitializeHW(robot);
+
+        //put this here to ensure encoders are disabled for teleop
+        robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        robot.motorBackRight.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
         telemetry.addData("Initialization", "TeleOp Initialization Complete!");
         telemetry.update();
@@ -114,11 +121,6 @@ public class TeleOpIterative extends OpMode
 //        {
 //            cmds.ReadyBeaconArm(robot);
 //        }
-//        else
-//        {
-//            cmds.DisarmBeaconArm(robot);
-//        }
-
 
         // Pause for metronome tick.  40 mS each cycle = update 25 times a second.
         //cmds.waitForTick(40);

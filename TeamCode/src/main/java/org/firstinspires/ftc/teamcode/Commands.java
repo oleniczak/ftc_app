@@ -70,10 +70,6 @@ public class Commands extends LinearOpMode
         robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         idle();
 
-        //robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        //robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         //since not reset, position doesn't mean anything - telemetry only ensures they are being read
         //telemetry.addData
@@ -139,6 +135,7 @@ public class Commands extends LinearOpMode
         telemetry.addData("InitializeHW", "> > Initializing Gyro Complete!");
         telemetry.update();
 
+
         telemetry.addData("InitializeHW", "> > Initializing Color Sensors ...");
         telemetry.update();
 
@@ -170,8 +167,13 @@ public class Commands extends LinearOpMode
         telemetry.update();
 
         //telemetry.addData("Debug", "%7d",Configuration.COUNTS_PER_INCH);
-        System.out.println(Configuration.COUNTS_PER_INCH);
+        //System.out.println(Configuration.COUNTS_PER_INCH);
         //System.out.println(opModeIsActive());
+
+        //robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        //robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         // Ensure that the opmode is still active
         //if (opModeIsActive())
@@ -226,16 +228,16 @@ public class Commands extends LinearOpMode
             StopDriving(robot);
 
             // Turn off RUN_TO_POSITION
-            //robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER );
-            //robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            //robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            //robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER );
+            robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-            robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            idle();
+            //robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //idle();
 
             //  sleep(250);   // optional pause after each move
         }
@@ -287,7 +289,7 @@ public class Commands extends LinearOpMode
         telemetry.addData("GyroDrive", "GyroDrive Starting...");
         telemetry.update();
 
-        robot.sensorGyro.resetZAxisIntegrator();
+        //robot.sensorGyro.resetZAxisIntegrator();
 
         // Ensure that the opmode is still active
 //        if (opModeIsActive())
