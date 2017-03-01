@@ -54,6 +54,9 @@ public class Configuration
     //*****************************************
     //Variables below are not available to be configured from phone
     //*****************************************
+        public static double SHORT_FIRST_BEACON_AIM_DIST =20.0;
+        public static double SHORT_FIRST_BEACON_DIST =20.0;
+
         public static double FORTYFIVE_DEGREE_TURN_INCHES = 9.0;
         public static double NINETY_DEGREE_TURN_INCHES = 18.0;
 

@@ -70,10 +70,10 @@ public class SR_Auto_Spicey extends LinearOpMode {
         }
         else
         {
-            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 30, 30, 5.0);
+            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_FIRST_BEACON_AIM_DIST, Configuration.SHORT_FIRST_BEACON_AIM_DIST, 5.0);
         }
 
-        //Turn 45 degrees to face beacon
+        //Turn to face beacon
         if(Configuration.ALLIANCE.equals("RED"))
         {
             cmds.EncoderDrive(robot, Configuration.TURN_POWER, -Configuration.FORTYFIVE_DEGREE_TURN_INCHES, Configuration.FORTYFIVE_DEGREE_TURN_INCHES, 3.0);
@@ -84,13 +84,20 @@ public class SR_Auto_Spicey extends LinearOpMode {
         }
 
         //Drive into beacon, pressing button
-        cmds.EncoderDrive(robot, Configuration.DRIVE_POWER,  Configuration.LONG_FIRST_BEACON_DIST,  Configuration.LONG_FIRST_BEACON_DIST, 5.0);
+        if (Configuration.START_POSITION.equals("LONG"))
+        {
+            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_FIRST_BEACON_DIST, Configuration.LONG_FIRST_BEACON_DIST, 5.0);
+        }
+        else
+        {
+            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_FIRST_BEACON_DIST, Configuration.SHORT_FIRST_BEACON_DIST, 5.0);
+        }
 
         //Backup 3 inches to assess color
         //cmds.EncoderDrive(robot,Configuration.APPROACH_SPEED, -3, -3, 5.0);
 
         //Sensing beacon will also invoke a 3 inch drive if the opposite color is detected
-        cmds.SenseBeacon(robot);
+        //cmds.SenseBeacon(robot);
 
         //Turn 90 degrees to drive to second beacon
         //if(Configuration.ALLIANCE.equals("RED"))

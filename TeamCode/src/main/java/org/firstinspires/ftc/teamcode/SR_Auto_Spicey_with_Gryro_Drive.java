@@ -64,7 +64,7 @@ class SR_Auto_Spicey_with_Gryro_Drive extends LinearOpMode
             cmds.GyroDrive(robot, Configuration.DRIVE_POWER, 30, 0, 5.0);
         }
 
-        //Turn 45 degrees to face beacon
+        //Turn to face beacon
         if(Configuration.ALLIANCE.equals("RED"))
         {
             cmds.EncoderDrive(robot, Configuration.TURN_POWER, -Configuration.FORTYFIVE_DEGREE_TURN_INCHES, Configuration.FORTYFIVE_DEGREE_TURN_INCHES, 3.0);
@@ -75,13 +75,20 @@ class SR_Auto_Spicey_with_Gryro_Drive extends LinearOpMode
         }
 
         //Drive into beacon, pressing button
-        cmds.GyroDrive(robot, Configuration.DRIVE_POWER,  Configuration.LONG_FIRST_BEACON_DIST,  0, 5.0);
+        if (Configuration.START_POSITION.equals("LONG"))
+        {
+            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_FIRST_BEACON_DIST, 0, 5.0);
+        }
+        else
+        {
+            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_FIRST_BEACON_DIST, 0, 5.0);
+        }
 
         //Backup 3 inches to assess color
         //cmds.GyroDrive(robot,-Configuration.APPROACH_SPEED, 3, 0, 5.0);
 
         //Sensing beacon will also invoke a 3 inch drive if the opposite color is detected
-        cmds.SenseBeacon(robot);
+        //cmds.SenseBeacon(robot);
 
         //Turn 90 degrees to drive to second beacon
         //if(Configuration.ALLIANCE.equals("RED"))

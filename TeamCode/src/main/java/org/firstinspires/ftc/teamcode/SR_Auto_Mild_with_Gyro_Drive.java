@@ -67,12 +67,10 @@ public class SR_Auto_Mild_with_Gyro_Drive extends LinearOpMode
         //Drive to center
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            //cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 60, 60, 5.0);
             cmds.GyroDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_DIST_TO_PARK, 0, 5.0);
         }
         else //SHORT
         {
-            //cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 40, 40, 5.0);
             cmds.GyroDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_DIST_TO_PARK, 0, 5.0);
         }
 
