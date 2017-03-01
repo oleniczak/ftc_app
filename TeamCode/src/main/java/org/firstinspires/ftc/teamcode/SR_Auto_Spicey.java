@@ -97,7 +97,7 @@ public class SR_Auto_Spicey extends LinearOpMode {
         //cmds.EncoderDrive(robot,Configuration.APPROACH_SPEED, -3, -3, 5.0);
 
         //Sensing beacon will also invoke a 3 inch drive if the opposite color is detected
-        //cmds.SenseBeacon(robot);
+        cmds.SenseBeacon(robot);
 
         //Turn 90 degrees to drive to second beacon
         //if(Configuration.ALLIANCE.equals("RED"))

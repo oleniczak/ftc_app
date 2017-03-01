@@ -2,8 +2,11 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
+import com.qualcomm.hardware.modernrobotics.ModernRoboticsUsbDeviceInterfaceModule;
+import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.Servo;
 //import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -39,6 +42,9 @@ public class Hardware
         ModernRoboticsI2cGyro sensorGyro=null;
         ModernRoboticsI2cColorSensor sensorColor=null;
 
+    //Device
+        DeviceInterfaceModule devIM = null;
+
     /* Constructor */
     public Hardware(Telemetry telemetry)
     {
@@ -72,6 +78,10 @@ public class Hardware
         // Define Sensors
             sensorGyro = (ModernRoboticsI2cGyro) hwMap.gyroSensor.get("gyro");
             sensorColor = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
+            //sensorColor.setI2cAddress(I2cAddr.create7bit(0x3ca));
+
+        // Define Devices
+            devIM = (DeviceInterfaceModule) hwMap.deviceInterfaceModule.get("Device Interface Module 1");
 
         telemetry.addData("Hardware", "Hardware Definition Complete!");
         telemetry.update();

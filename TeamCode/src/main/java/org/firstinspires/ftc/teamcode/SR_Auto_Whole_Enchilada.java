@@ -90,7 +90,7 @@ public class SR_Auto_Whole_Enchilada extends LinearOpMode
         //cmds.GyroDrive(robot,-Configuration.APPROACH_SPEED, 3, 0, 5.0);
 
         //Sensing beacon will also invoke a 3 inch drive if the opposite color is detected
-        //cmds.SenseBeacon(robot);
+        cmds.SenseBeacon(robot);
 
         //Turn 90 degrees to drive to second beacon
         //***** REPLACE WITH GYRO READINGS *****

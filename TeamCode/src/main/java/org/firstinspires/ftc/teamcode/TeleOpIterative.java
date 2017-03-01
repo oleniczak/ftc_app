@@ -111,10 +111,14 @@ public class TeleOpIterative extends OpMode
             robot.servoLift.setPosition(Configuration.CLOSED_LIFT_SERVO_POS);
         }
 
-//        if (gamepad2.b)
-//        {
-//            cmds.Shoot(robot);
-//        }
+        if (gamepad2.b)
+        {
+            robot.sensorColor.enableLed(true);
+        }
+        else
+        {
+            robot.sensorColor.enableLed(false);
+        }
 
         //Alternate driver - servo controls
 //        if (gamepad2.x)

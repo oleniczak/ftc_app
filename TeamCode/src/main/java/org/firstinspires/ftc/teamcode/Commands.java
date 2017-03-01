@@ -1,5 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
+import android.graphics.Color;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
@@ -70,8 +72,6 @@ public class Commands extends LinearOpMode
         robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         idle();
 
-
-        //since not reset, position doesn't mean anything - telemetry only ensures they are being read
         //telemetry.addData
         //        ("InitializeHW", "> > Starting at %7d :%7d :%7d :%7d",
         //                robot.motorFrontLeft.getCurrentPosition(),
@@ -139,7 +139,7 @@ public class Commands extends LinearOpMode
         telemetry.addData("InitializeHW", "> > Initializing Color Sensors ...");
         telemetry.update();
 
-        robot.sensorColor.enableLed(true);
+robot.sensorColor.enableLed(false);
 
         telemetry.addData("InitializeHW", "> > Initializing Color Sensors Complete!");
         telemetry.update();
@@ -487,30 +487,57 @@ public class Commands extends LinearOpMode
         telemetry.addData("SenseBeacon", "Beginning Beacon Sensing ...");
         telemetry.update();
 
+        // convert the RGB values to HSV values.
+        //float hsvValues [] = {0,0,0};
+        //Color.RGBToHSV(robot.sensorColor.red() * 8, robot.sensorColor.green() * 8, robot.sensorColor.blue() * 8, hsvValues);
+
 //        robot.sensorColor.red();
 //        robot.sensorColor.blue();
 //        robot.sensorColor.green();
 //        robot.sensorColor.alpha();    //luminosity
 //        robot.sensorColor.argb();     //hue
 
-        telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
-        telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
-        telemetry.update();
+        runtime.reset();
 
-        while (robot.sensorColor.alpha() < 20)
+        while (robot.sensorColor.alpha() < 20 && runtime.seconds() < 10)
         {
-            if (    ((robot.sensorColor.red() >= 8) && (Configuration.ALLIANCE.equals("BLUE"))) ||
-                    ((robot.sensorColor.blue() <= 3) && (Configuration.ALLIANCE.equals("RED")))
-                    )
+            telemetry.addData("SenseBeacon", "> Red Value :" + robot.sensorColor.red());
+            telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
+            telemetry.update();
+
+            if (robot.sensorColor.red()>=8)
             {
-                //Opposing color  found, wait 6 seconds then take action
+                telemetry.addData("SenseBeacon", "> FOUND Red - Value :" + robot.sensorColor.red());
+                telemetry.update();
+                robot.devIM.setLED(1,true);     //Red
+                robot.devIM.setLED(0,false);    //Blue
 
-                //wait 6 seconds before determining whether to drive forward again (wrong color)
-                sleep(6000);
+                if (Configuration.ALLIANCE.equals("BLUE"))
+                {
+                    //wait 6 seconds before determining whether to drive forward again (wrong color)
+                    sleep(6000);
 
-                // Drive forward 3 inches to bump beacon, then back off
-                //EncoderDrive(robot, Configuration.APPROACH_SPEED, 3, 3, 3.0);
-                //EncoderDrive(robot, Configuration.APPROACH_SPEED,-3,-3, 3.0);
+                    // Drive forward 3 inches to bump beacon, then back off
+                    //EncoderDrive(robot, Configuration.APPROACH_SPEED, 3, 3, 3.0);
+                    //EncoderDrive(robot, Configuration.APPROACH_SPEED,-3,-3, 3.0);
+                }
+            }
+            else if (robot.sensorColor.blue()<=3)
+            {
+                telemetry.addData("SenseBeacon", "> FOUND Blue - Value: " + robot.sensorColor.blue());
+                telemetry.update();
+                robot.devIM.setLED(1,false);     //Red
+                robot.devIM.setLED(0,true);    //Blue
+
+                if (Configuration.ALLIANCE.equals("RED"))
+                {
+                    //wait 6 seconds before determining whether to drive forward again (wrong color)
+                    sleep(6000);
+
+                    // Drive forward 3 inches to bump beacon, then back off
+                    //EncoderDrive(robot, Configuration.APPROACH_SPEED, 3, 3, 3.0);
+                    //EncoderDrive(robot, Configuration.APPROACH_SPEED,-3,-3, 3.0);
+                }
             }
             idle();
         }
