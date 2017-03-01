@@ -139,7 +139,7 @@ public class Commands extends LinearOpMode
         telemetry.addData("InitializeHW", "> > Initializing Color Sensors ...");
         telemetry.update();
 
-robot.sensorColor.enableLed(false);
+        robot.sensorColor.enableLed(false);
 
         telemetry.addData("InitializeHW", "> > Initializing Color Sensors Complete!");
         telemetry.update();
@@ -147,7 +147,19 @@ robot.sensorColor.enableLed(false);
         telemetry.addData("InitializeHW", "> Initializing Sensors Complete!");
         telemetry.update();
 
+        /* ******************************************************/
+        // Initialize Device Modules
+        /* ******************************************************/
+        telemetry.addData("InitializeHW", "> Initializing Device Modules ...");
+        telemetry.update();
 
+        robot.devIM.setLED(1,false);    //RED
+        robot.devIM.setLED(0,false);    //BLUE
+
+        telemetry.addData("InitializeHW", "> Initializing Device Modules Complete!");
+        telemetry.update();
+
+        
         telemetry.addData("InitializeHW", "Initialization HW Complete!");
         telemetry.update();
     }
