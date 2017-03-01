@@ -49,13 +49,13 @@ public class Configuration
         public static double LONG_DIST_TO_PARK = 72.0;
         public static double SHORT_DIST_TO_PARK =60.0;
         public static double LONG_FIRST_BEACON_AIM_DIST =66.0;
+        public static double SHORT_FIRST_BEACON_AIM_DIST =20.0;
         public static double LONG_FIRST_BEACON_DIST =20.0;
+        public static double SHORT_FIRST_BEACON_DIST =20.0;
 
     //*****************************************
     //Variables below are not available to be configured from phone
     //*****************************************
-        public static double SHORT_FIRST_BEACON_AIM_DIST =20.0;
-        public static double SHORT_FIRST_BEACON_DIST =20.0;
 
         public static double FORTYFIVE_DEGREE_TURN_INCHES = 9.0;
         public static double NINETY_DEGREE_TURN_INCHES = 18.0;
@@ -112,7 +112,9 @@ public class Configuration
             SHORT_DIST_TO_PARK = Double.parseDouble(properties.getProperty("SHORT_DIST_TO_PARK"));
 
             LONG_FIRST_BEACON_AIM_DIST = Double.parseDouble(properties.getProperty("LONG_FIRST_BEACON_AIM_DIST"));
+//            SHORT_FIRST_BEACON_AIM_DIST = Double.parseDouble(properties.getProperty("SHORT_FIRST_BEACON_AIM_DIST"));
             LONG_FIRST_BEACON_DIST = Double.parseDouble(properties.getProperty("LONG_FIRST_BEACON_DIST"));
+//            SHORT_FIRST_BEACON_DIST = Double.parseDouble(properties.getProperty("SHORT_FIRST_BEACON_DIST"));
 
             in.close();
         }
