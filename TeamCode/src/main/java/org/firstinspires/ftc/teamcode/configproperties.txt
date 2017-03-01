@@ -12,7 +12,8 @@ LONG_DIST_TO_SHOOT = 10.0
 SHORT_DIST_TO_SHOOT = 0.0
 LONG_DIST_TO_PARK = 72.0
 SHORT_DIST_TO_PARK = 60.0
-NINETY_DEGREE_TURN_INCHES = 9
+LONG_FIRST_BEACON_AIM_DIST = 66.0
+LONG_FIRST_BEACON_DIST = 20.0
 
 #ALLIANCE:              RED or BLUE
 #START_POSITION:        LONG or SHORT
@@ -28,4 +29,4 @@ NINETY_DEGREE_TURN_INCHES = 9
 #SHORT_DIST_TO_SHOOT    Distance:   Inches to drive from SHORT position before shooting ball
 #LONG_DIST_TO_PARK      Distance:   Inches to drive from after shooting when starting in LONG position
 #SHORT_DIST_TO_PARK     Distance:   Inches to drive from after shooting when starting in SHORT position
-#NINETY_DEGREE_TURN_INCHES  Distance:  Inches to turn wheels for 90 degree turn
+#FIRST_BEACON_DIST      Distance:   Inches from center to first beacon

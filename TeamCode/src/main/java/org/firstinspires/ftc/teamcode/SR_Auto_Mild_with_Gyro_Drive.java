@@ -9,8 +9,8 @@ FUNCTION:
     Autonomous
 */
 
-@Autonomous(name="Mild Gyro Drive (Config Alliance & Position)", group="Autonomous")
-@Disabled
+@Autonomous(name="Mild + Gyro (Config Alliance & Position)", group="Autonomous")
+//@Disabled
 public class SR_Auto_Mild_with_Gyro_Drive extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
@@ -46,34 +46,34 @@ public class SR_Auto_Mild_with_Gyro_Drive extends LinearOpMode
         //Move close enough to shoot balls
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            //cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 36, 36, 5.0);
-            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, 36, 0, 5.0);
+            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_DIST_TO_SHOOT, 0, 5.0);
         }
         else //SHORT
         {
-            //cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 6, 6, 5.0);
-            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, 6, 0, 5.0);
+            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_DIST_TO_SHOOT, 0, 5.0);
         }
 
-        //turn on launch motor
-//        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
+        robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
+
+        //Use delay until ball launch is ready for use
+        sleep(500);
+
+        robot.motorCollect.setPower(1.0);
 
         cmds.Shoot(robot);
 
-        cmds.Shoot(robot);
-
-//        robot.motorLaunch.setPower(0);
+        robot.motorCollect.setPower(0);
 
         //Drive to center
         if (Configuration.START_POSITION.equals("LONG"))
         {
             //cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 60, 60, 5.0);
-            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, 60, 0, 5.0);
+            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_DIST_TO_PARK, 0, 5.0);
         }
         else //SHORT
         {
             //cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 40, 40, 5.0);
-            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, 40, 0, 5.0);
+            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_DIST_TO_PARK, 0, 5.0);
         }
 
         cmds.StopDriving(robot);

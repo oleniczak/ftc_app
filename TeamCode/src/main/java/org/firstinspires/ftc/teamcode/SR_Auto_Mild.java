@@ -8,7 +8,7 @@ FUNCTION:
     Autonomous
 */
 
-@Autonomous(name="Mild no Gyro (Config Alliance & Position)", group="Autonomous")
+@Autonomous(name="Mild (Config Alliance & Position)", group="Autonomous")
 //@Disabled
 public class SR_Auto_Mild extends LinearOpMode
 {
@@ -60,7 +60,6 @@ public class SR_Auto_Mild extends LinearOpMode
         robot.motorCollect.setPower(1.0);
 
         cmds.Shoot(robot);
-        //cmds.Shoot(robot);
 
         robot.motorCollect.setPower(0);
 

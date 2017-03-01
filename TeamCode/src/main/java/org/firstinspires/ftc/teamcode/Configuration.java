@@ -46,15 +46,19 @@ public class Configuration
     //Measurement Settings
         public static double LONG_DIST_TO_SHOOT =10.0;
         public static double SHORT_DIST_TO_SHOOT =0.0;
-        public static double LONG_DIST_TO_PARK =15.0; //72
+        public static double LONG_DIST_TO_PARK = 72.0;
         public static double SHORT_DIST_TO_PARK =60.0;
-        public static double NINETY_DEGREE_TURN_INCHES = 9.0;
+        public static double LONG_FIRST_BEACON_AIM_DIST =66.0;
+        public static double LONG_FIRST_BEACON_DIST =20.0;
 
     //*****************************************
     //Variables below are not available to be configured from phone
     //*****************************************
+        public static double FORTYFIVE_DEGREE_TURN_INCHES = 9.0;
+        public static double NINETY_DEGREE_TURN_INCHES = 18.0;
+
         private static double COUNTS_PER_MOTOR_REV = 1120;
-        private static double DRIVE_GEAR_REDUCTION = 0.397;
+        private static double DRIVE_GEAR_REDUCTION = 0.39;
         private static double WHEEL_DIAMETER_INCHES = 4.0;
         public static double COUNTS_PER_INCH = (COUNTS_PER_MOTOR_REV * DRIVE_GEAR_REDUCTION) / (WHEEL_DIAMETER_INCHES * 3.141592652589);
 
@@ -103,7 +107,8 @@ public class Configuration
             LONG_DIST_TO_PARK = Double.parseDouble(properties.getProperty("LONG_DIST_TO_PARK"));
             SHORT_DIST_TO_PARK = Double.parseDouble(properties.getProperty("SHORT_DIST_TO_PARK"));
 
-            NINETY_DEGREE_TURN_INCHES = Integer.parseInt(properties.getProperty("NINETY_DEGREE_TURN_INCHES"));
+            LONG_FIRST_BEACON_AIM_DIST = Double.parseDouble(properties.getProperty("LONG_FIRST_BEACON_AIM_DIST"));
+            LONG_FIRST_BEACON_DIST = Double.parseDouble(properties.getProperty("LONG_FIRST_BEACON_DIST"));
 
         //in.close();
 

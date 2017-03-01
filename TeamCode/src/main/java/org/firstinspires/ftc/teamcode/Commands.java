@@ -110,7 +110,6 @@ public class Commands extends LinearOpMode
         telemetry.addData("InitializeHW", "> > Initializing Gyro ...");
         telemetry.update();
 
-        /*
         int xVal, yVal, zVal = 0;     // Gyro rate Values
         int heading = 0;              // Gyro integrated heading
         int angleZ = 0;
@@ -122,16 +121,20 @@ public class Commands extends LinearOpMode
 
         // values is a reference to the hsvValues array.
         final float values[] = hsvValues;
-        */
 
-//        robot.sensorGyro.calibrate();
+        robot.sensorGyro.calibrate();
 
         // make sure the gyro is calibrated.
-//        while (!isStopRequested() && robot.sensorGyro.isCalibrating())
-//        {
-//            sleep(50);
-//            idle();
-//        }
+        while (!isStopRequested() && robot.sensorGyro.isCalibrating())
+        {
+            sleep(50);
+            idle();
+        }
+
+        robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
         telemetry.addData("InitializeHW", "> > Initializing Gyro Complete!");
         telemetry.update();
@@ -139,8 +142,7 @@ public class Commands extends LinearOpMode
         telemetry.addData("InitializeHW", "> > Initializing Color Sensors ...");
         telemetry.update();
 
-//        robot.sensorColorLeft.enableLed(false);
-//        robot.sensorColorRight.enableLed(false);
+        robot.sensorColor.enableLed(true);
 
         telemetry.addData("InitializeHW", "> > Initializing Color Sensors Complete!");
         telemetry.update();
@@ -264,7 +266,7 @@ public class Commands extends LinearOpMode
         telemetry.update();
     }
 
-        public void GyroDrive (Hardware robot,
+    public void GyroDrive (Hardware robot,
                            double speed,
                            double distance,
                            double angle,
@@ -285,19 +287,10 @@ public class Commands extends LinearOpMode
         telemetry.addData("GyroDrive", "GyroDrive Starting...");
         telemetry.update();
 
-        robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        idle();
-
-        robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-        robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.sensorGyro.resetZAxisIntegrator();
 
         // Ensure that the opmode is still active
-        if (opModeIsActive())
+//        if (opModeIsActive())
         {
             // Determine new target position, and pass to motor controller
             moveCounts = (int)(distance * Configuration.COUNTS_PER_INCH);
@@ -328,7 +321,7 @@ public class Commands extends LinearOpMode
             robot.motorBackRight.setPower(speed);
 
             // keep looping while we are still active, and BOTH motors are running.
-            while (opModeIsActive() &&
+            while (//opModeIsActive() &&
                     runtime.seconds() < timeoutS &&
                     robot.motorFrontLeft.isBusy() &&
                     robot.motorFrontRight.isBusy() &&
@@ -375,11 +368,17 @@ public class Commands extends LinearOpMode
 
             StopDriving(robot);
 
+            robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            idle();
+
             // Turn off RUN_TO_POSITION
-            robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER );
-            robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER );
+            //robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
         telemetry.addData("GyroDrive", "GyroDrive Complete!");
         telemetry.update();
@@ -496,7 +495,7 @@ public class Commands extends LinearOpMode
         telemetry.addData("SenseBeacon", "> Blue Value: " + robot.sensorColor.blue());
         telemetry.update();
 
-        //while (robot.sensorColor.alpha() < 20)
+        while (robot.sensorColor.alpha() < 20)
         {
             if (    ((robot.sensorColor.red() >= 8) && (Configuration.ALLIANCE.equals("BLUE"))) ||
                     ((robot.sensorColor.blue() <= 3) && (Configuration.ALLIANCE.equals("RED")))
@@ -508,8 +507,8 @@ public class Commands extends LinearOpMode
                 sleep(6000);
 
                 // Drive forward 3 inches to bump beacon, then back off
-                EncoderDrive(robot, Configuration.APPROACH_SPEED, 3, 3, 3.0);
-                EncoderDrive(robot, Configuration.APPROACH_SPEED,-3,-3, 3.0);
+                //EncoderDrive(robot, Configuration.APPROACH_SPEED, 3, 3, 3.0);
+                //EncoderDrive(robot, Configuration.APPROACH_SPEED,-3,-3, 3.0);
             }
             idle();
         }
