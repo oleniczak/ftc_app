@@ -78,7 +78,7 @@ public class Hardware
         // Define Sensors
             sensorGyro = (ModernRoboticsI2cGyro) hwMap.gyroSensor.get("gyro");
             sensorColor = (ModernRoboticsI2cColorSensor) hwMap.colorSensor.get("color");
-            //sensorColor.setI2cAddress(I2cAddr.create7bit(0x3ca));
+            //sensorColor.setI2cAddress(I2cAddr.create7bit(0x3c));
 
         // Define Devices
             devIM = (DeviceInterfaceModule) hwMap.deviceInterfaceModule.get("Device Interface Module 1");

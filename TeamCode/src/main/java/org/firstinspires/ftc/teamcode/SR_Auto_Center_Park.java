@@ -8,9 +8,9 @@ FUNCTION:
     Autonomous
 */
 
-@Autonomous(name="Mild (Config Alliance & Position)", group="Autonomous")
+@Autonomous(name="Center Park Encoders (Config Alliance & Position)", group="Autonomous")
 //@Disabled
-public class SR_Auto_Mild extends LinearOpMode
+public class SR_Auto_Center_Park extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
@@ -72,6 +72,7 @@ public class SR_Auto_Mild extends LinearOpMode
         {
             cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_DIST_TO_PARK, Configuration.SHORT_DIST_TO_PARK, 5.0);
         }
+
         cmds.StopDriving(robot);
 
         telemetry.addData("Status","Autonomous Complete!");

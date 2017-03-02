@@ -9,9 +9,9 @@ FUNCTION:
     Autonomous
 */
 
-@Autonomous(name="Mild + Gyro (Config Alliance & Position)", group="Autonomous")
+@Autonomous(name="Center Park Gyro (Config Alliance & Position)", group="Autonomous")
 //@Disabled
-public class SR_Auto_Mild_with_Gyro_Drive extends LinearOpMode
+public class SR_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);

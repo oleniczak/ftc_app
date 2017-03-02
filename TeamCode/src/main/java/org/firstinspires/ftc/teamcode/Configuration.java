@@ -57,8 +57,8 @@ public class Configuration
     //Variables below are not available to be configured from phone
     //*****************************************
 
-        public static double FORTYFIVE_DEGREE_TURN_INCHES = 9.0;
-        public static double NINETY_DEGREE_TURN_INCHES = 18.0;
+        public static double FORTYFIVE_DEGREE_TURN_INCHES = 10.0;
+        public static double NINETY_DEGREE_TURN_INCHES = 20.0;
 
         private static double COUNTS_PER_MOTOR_REV = 1120;
         private static double DRIVE_GEAR_REDUCTION = 0.39;

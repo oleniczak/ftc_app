@@ -8,10 +8,9 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * 2/12/2017 9019
  */
 
-@Autonomous(name="Spicey + Gyro (Config Alliance & Position)", group="Autonomous")
+@Autonomous(name="Beacon Encoders (Config Alliance & Position)", group="Autonomous")
 //@Disabled
-class SR_Auto_Spicey_with_Gryro_Drive extends LinearOpMode
-{
+public class SR_Auto_Beacon extends LinearOpMode {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
     private Commands cmds = new Commands(telemetry);
@@ -33,14 +32,23 @@ class SR_Auto_Spicey_with_Gryro_Drive extends LinearOpMode
 
         waitForStart();
 
+        //Wait for alliance moves or to avoid penalty for early cross
+        telemetry.addData("Status", "Delay before driving ...");
+        telemetry.update();
+
+        sleep(Configuration.AUTO_DELAY_TIME);
+
+        telemetry.addData("Status", "Delay Complete!");
+        telemetry.update();
+
         //Move close enough to shoot balls
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_DIST_TO_SHOOT, 0, 5.0);
+            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_DIST_TO_SHOOT, Configuration.LONG_DIST_TO_SHOOT, 5.0);
         }
         else //SHORT
         {
-            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_DIST_TO_SHOOT, 0, 5.0);
+            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_DIST_TO_SHOOT, Configuration.SHORT_DIST_TO_SHOOT, 5.0);
         }
 
         robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
@@ -51,41 +59,42 @@ class SR_Auto_Spicey_with_Gryro_Drive extends LinearOpMode
         robot.motorCollect.setPower(1.0);
 
         cmds.Shoot(robot);
+        //cmds.Shoot(robot);
 
         robot.motorCollect.setPower(0);
 
         //Drive to line up with closest beacon
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_FIRST_BEACON_AIM_DIST, 0, 5.0);
+            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_FIRST_BEACON_AIM_DIST, Configuration.LONG_FIRST_BEACON_AIM_DIST, 5.0);
         }
         else
         {
-            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, 30, 0, 5.0);
+            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_FIRST_BEACON_AIM_DIST, Configuration.SHORT_FIRST_BEACON_AIM_DIST, 5.0);
         }
 
         //Turn to face beacon
         if(Configuration.ALLIANCE.equals("RED"))
         {
-            cmds.EncoderDrive(robot, Configuration.TURN_POWER, -Configuration.FORTYFIVE_DEGREE_TURN_INCHES, Configuration.FORTYFIVE_DEGREE_TURN_INCHES, 3.0);
+            cmds.EncoderDrive(robot, Configuration.TURN_POWER, -Configuration.FORTYFIVE_DEGREE_TURN_INCHES, Configuration.FORTYFIVE_DEGREE_TURN_INCHES, 5.0);
         }
         else    //BLUE
         {
-            cmds.EncoderDrive(robot, Configuration.TURN_POWER, Configuration.FORTYFIVE_DEGREE_TURN_INCHES, -Configuration.FORTYFIVE_DEGREE_TURN_INCHES, 3.0);
+            cmds.EncoderDrive(robot, Configuration.TURN_POWER, Configuration.FORTYFIVE_DEGREE_TURN_INCHES, -Configuration.FORTYFIVE_DEGREE_TURN_INCHES, 5.0);
         }
 
         //Drive into beacon, pressing button
         if (Configuration.START_POSITION.equals("LONG"))
         {
-            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_FIRST_BEACON_DIST, 0, 5.0);
+            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.LONG_FIRST_BEACON_DIST, Configuration.LONG_FIRST_BEACON_DIST, 5.0);
         }
         else
         {
-            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_FIRST_BEACON_DIST, 0, 5.0);
+            cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_FIRST_BEACON_DIST, Configuration.SHORT_FIRST_BEACON_DIST, 5.0);
         }
 
         //Backup 3 inches to assess color
-        //cmds.GyroDrive(robot,-Configuration.APPROACH_SPEED, 3, 0, 5.0);
+        //cmds.EncoderDrive(robot,Configuration.APPROACH_SPEED, -3, -3, 5.0);
 
         //Sensing beacon will also invoke a 3 inch drive if the opposite color is detected
         cmds.SenseBeacon(robot);
@@ -102,7 +111,6 @@ class SR_Auto_Spicey_with_Gryro_Drive extends LinearOpMode
 
         //Drive to second beacon
         //cmds.EncoderDrive(robot, Configuration.DRIVE_POWER, 40, 40, 5.0);
-        //cmds.GyroDrive(robot, Configuration.DRIVE_POWER, 40, 0, 5.0);
 
         //Turn 90 degrees to face beacon
         //if(Configuration.ALLIANCE.equals("RED"))

@@ -106,17 +106,17 @@ public class Commands extends LinearOpMode
         telemetry.addData("InitializeHW", "> > Initializing Gyro ...");
         telemetry.update();
 
-        int xVal, yVal, zVal = 0;     // Gyro rate Values
-        int heading = 0;              // Gyro integrated heading
-        int angleZ = 0;
-        boolean lastResetState = false;
-        boolean curResetState  = false;
+        //int xVal, yVal, zVal = 0;     // Gyro rate Values
+        //int heading = 0;              // Gyro integrated heading
+        //int angleZ = 0;
+        //boolean lastResetState = false;
+        //boolean curResetState  = false;
 
         // hsvValues is an array that will hold the hue, saturation, and value information.
-        float hsvValues[] = {0F,0F,0F};
+        //float hsvValues[] = {0F,0F,0F};
 
         // values is a reference to the hsvValues array.
-        final float values[] = hsvValues;
+        //final float values[] = hsvValues;
 
         robot.sensorGyro.calibrate();
 
@@ -131,6 +131,8 @@ public class Commands extends LinearOpMode
         robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        robot.sensorGyro.resetZAxisIntegrator();    //03-01-2017
 
         telemetry.addData("InitializeHW", "> > Initializing Gyro Complete!");
         telemetry.update();
@@ -159,7 +161,7 @@ public class Commands extends LinearOpMode
         telemetry.addData("InitializeHW", "> Initializing Device Modules Complete!");
         telemetry.update();
 
-        
+
         telemetry.addData("InitializeHW", "Initialization HW Complete!");
         telemetry.update();
     }
@@ -217,12 +219,12 @@ public class Commands extends LinearOpMode
             robot.motorBackRight.setPower(speed);
 
             // keep looping while we are still active, and there is time left, and both motors are running.
-            while ( //opModeIsActive() &&
+            while ( opModeIsActive() && // 03-01-2017
                     runtime.seconds() < timeoutS &&
                     robot.motorFrontLeft.isBusy() &&
-                    robot.motorFrontRight.isBusy() &&
-                    robot.motorBackLeft.isBusy() &&
-                    robot.motorBackRight.isBusy()
+                    robot.motorFrontRight.isBusy() //&& 03-01-2017
+                    //robot.motorBackLeft.isBusy() &&
+                    //robot.motorBackRight.isBusy()
                     )
             {
                 // Display it for the driver.
@@ -239,17 +241,17 @@ public class Commands extends LinearOpMode
             // Stop all motion;
             StopDriving(robot);
 
-            // Turn off RUN_TO_POSITION
-            robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER );
-            robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-
             //robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             //robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             //robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             //robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
             //idle();
+
+            // Turn off RUN_TO_POSITION
+            robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER );
+            robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
             //  sleep(250);   // optional pause after each move
         }
@@ -304,7 +306,7 @@ public class Commands extends LinearOpMode
         //robot.sensorGyro.resetZAxisIntegrator();
 
         // Ensure that the opmode is still active
-//        if (opModeIsActive())
+        //if (opModeIsActive())
         {
             // Determine new target position, and pass to motor controller
             moveCounts = (int)(distance * Configuration.COUNTS_PER_INCH);
@@ -335,12 +337,12 @@ public class Commands extends LinearOpMode
             robot.motorBackRight.setPower(speed);
 
             // keep looping while we are still active, and BOTH motors are running.
-            while (//opModeIsActive() &&
+            while (opModeIsActive() &&
                     runtime.seconds() < timeoutS &&
                     robot.motorFrontLeft.isBusy() &&
-                    robot.motorFrontRight.isBusy() &&
-                    robot.motorBackLeft.isBusy() &&
-                    robot.motorBackRight.isBusy()
+                    robot.motorFrontRight.isBusy() //&& 03-01-2017
+                    //robot.motorBackLeft.isBusy() &&
+                    //robot.motorBackRight.isBusy()
                     )
             {
                 // adjust relative speed based on heading error.
@@ -382,17 +384,18 @@ public class Commands extends LinearOpMode
 
             StopDriving(robot);
 
-            robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-            idle();
+            //robot.motorFrontLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //robot.motorFrontRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //robot.motorBackLeft.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //robot.motorBackRight.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+            //idle();
 
             // Turn off RUN_TO_POSITION
-            //robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER );
-            //robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            //robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
-            //robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            //03-01-2017
+            robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER );
+            robot.motorFrontRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+            robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         }
         telemetry.addData("GyroDrive", "GyroDrive Complete!");
         telemetry.update();

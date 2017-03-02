@@ -8,8 +8,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * 2/12/2017 9019
  */
 
-@Autonomous(name="Whole Enchilada (Config Alliance & Position)", group="Autonomous")
-//@Disabled
+@Autonomous(name="All Gyro (Config Alliance & Position)", group="Autonomous")
+@Disabled
 public class SR_Auto_Whole_Enchilada extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
