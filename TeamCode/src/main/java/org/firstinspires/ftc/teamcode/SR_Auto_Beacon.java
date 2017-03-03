@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * 2/12/2017 9019
  */
 
-@Autonomous(name="Beacon Encoders (Config Alliance & Position)", group="Autonomous")
+@Autonomous(name="Beacon (Encoders)", group="Autonomous")
 //@Disabled
 public class SR_Auto_Beacon extends LinearOpMode {
     private Hardware robot = new Hardware(telemetry);
@@ -16,7 +16,8 @@ public class SR_Auto_Beacon extends LinearOpMode {
     private Commands cmds = new Commands(telemetry);
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException
+    {
         telemetry.addData("BEGIN", "Autonomous Starting...");
         telemetry.update();
 

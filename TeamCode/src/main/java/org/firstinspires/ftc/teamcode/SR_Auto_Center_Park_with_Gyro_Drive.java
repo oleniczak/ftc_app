@@ -9,7 +9,7 @@ FUNCTION:
     Autonomous
 */
 
-@Autonomous(name="Center Park Gyro (Config Alliance & Position)", group="Autonomous")
+@Autonomous(name="Center Park (Gyro)", group="Autonomous")
 //@Disabled
 public class SR_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
 {
@@ -18,7 +18,8 @@ public class SR_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
     private Commands cmds = new Commands(telemetry);
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException
+    {
         telemetry.addData("BEGIN", "Autonomous Starting...");
         telemetry.update();
 

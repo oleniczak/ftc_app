@@ -8,7 +8,7 @@ FUNCTION:
     Autonomous
 */
 
-@Autonomous(name="Center Park Encoders (Config Alliance & Position)", group="Autonomous")
+@Autonomous(name="Center Park (Encoders)", group="Autonomous")
 //@Disabled
 public class SR_Auto_Center_Park extends LinearOpMode
 {
@@ -17,7 +17,8 @@ public class SR_Auto_Center_Park extends LinearOpMode
     private Commands cmds = new Commands(telemetry);
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException
+    {
         telemetry.addData("BEGIN", "Autonomous Starting...");
         telemetry.update();
 

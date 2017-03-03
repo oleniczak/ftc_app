@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
  * 2/12/2017 9019
  */
 
-@Autonomous(name="All Gyro (Config Alliance & Position)", group="Autonomous")
+@Autonomous(name="All Gyro", group="Autonomous")
 @Disabled
 public class SR_Auto_Whole_Enchilada extends LinearOpMode
 {
@@ -17,7 +17,8 @@ public class SR_Auto_Whole_Enchilada extends LinearOpMode
     private Commands cmds = new Commands(telemetry);
 
     @Override
-    public void runOpMode() {
+    public void runOpMode() throws InterruptedException
+    {
         telemetry.addData("BEGIN", "Autonomous Starting...");
         telemetry.update();
 

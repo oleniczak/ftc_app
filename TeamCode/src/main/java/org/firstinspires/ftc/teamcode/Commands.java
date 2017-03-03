@@ -219,7 +219,7 @@ public class Commands extends LinearOpMode
             robot.motorBackRight.setPower(speed);
 
             // keep looping while we are still active, and there is time left, and both motors are running.
-            while ( opModeIsActive() && // 03-01-2017
+            while ( //opModeIsActive() && // 03-01-2017
                     runtime.seconds() < timeoutS &&
                     robot.motorFrontLeft.isBusy() &&
                     robot.motorFrontRight.isBusy() //&& 03-01-2017
@@ -337,7 +337,7 @@ public class Commands extends LinearOpMode
             robot.motorBackRight.setPower(speed);
 
             // keep looping while we are still active, and BOTH motors are running.
-            while (opModeIsActive() &&
+            while (//opModeIsActive() &&
                     runtime.seconds() < timeoutS &&
                     robot.motorFrontLeft.isBusy() &&
                     robot.motorFrontRight.isBusy() //&& 03-01-2017
