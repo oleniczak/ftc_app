@@ -15,7 +15,7 @@ public class TeleOpIterative extends OpMode
 {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
-    private Commands cmds = new Commands(telemetry);
+    //private Commands cmds = new Commands(telemetry, this);
 
     private final ElapsedTime runtime = new ElapsedTime();
 
@@ -41,7 +41,7 @@ public class TeleOpIterative extends OpMode
 
         configs.loadParameters();
 
-        cmds.InitializeHW(robot);
+        //cmds.InitializeHW(robot);
 
         //put this here to ensure encoders are disabled for teleop
         robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);

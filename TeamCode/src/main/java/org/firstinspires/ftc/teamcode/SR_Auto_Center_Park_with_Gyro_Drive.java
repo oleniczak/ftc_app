@@ -15,7 +15,7 @@ public class SR_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
-    private Commands cmds = new Commands(telemetry);
+    private Commands cmds = new Commands(telemetry,this);
 
     @Override
     public void runOpMode() throws InterruptedException

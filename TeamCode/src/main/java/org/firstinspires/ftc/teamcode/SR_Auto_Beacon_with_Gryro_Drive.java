@@ -14,7 +14,7 @@ class SR_Auto_Beacon_with_Gryro_Drive extends LinearOpMode
 {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
-    private Commands cmds = new Commands(telemetry);
+    private Commands cmds = new Commands(telemetry, this);
 
     @Override
     public void runOpMode() throws InterruptedException

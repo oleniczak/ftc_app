@@ -17,11 +17,13 @@ PURPOSE:
 public class Commands extends LinearOpMode
 {
     private ElapsedTime runtime = new ElapsedTime();
+    LinearOpMode opMode;
 
     /* Constructor */
-    public Commands(Telemetry telemetry)
+    public Commands(Telemetry telemetry, LinearOpMode opMode)
     {
         this.telemetry = telemetry;
+        this.opMode = opMode;
     }
 
     public void runOpMode()
@@ -189,8 +191,11 @@ public class Commands extends LinearOpMode
         //robot.motorBackLeft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         //robot.motorBackRight.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
+        System.out.println(opModeIsActive());
+        System.out.println(opMode.opModeIsActive());
+
         // Ensure that the opmode is still active
-        //if (opModeIsActive())
+        if (opMode.opModeIsActive())
         {
             // Calculate new target position
             newLeftFrontTarget = robot.motorFrontLeft.getCurrentPosition() + (int) (leftInches * Configuration.COUNTS_PER_INCH);
