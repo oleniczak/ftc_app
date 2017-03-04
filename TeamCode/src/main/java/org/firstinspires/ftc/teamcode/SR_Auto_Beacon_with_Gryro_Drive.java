@@ -4,9 +4,21 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-/**
- * 2/12/2017 9019
- */
+/*
+FUNCTION:
+    Autonomous: Uses encoders only
+
+    Steps:
+        <optional delay>
+        Drive within shooting distance
+        Shoot ball(s)
+        Drive to align with first beacon
+        Turn 45% to aim to beacon
+        Drive into beacon
+        <back up 3 inches>
+        <sense beacon, taking action, based on result>
+        Stop
+*/
 
 @Autonomous(name="Beacon (Gyro)", group="Autonomous")
 //@Disabled
@@ -15,6 +27,7 @@ class SR_Auto_Beacon_with_Gryro_Drive extends LinearOpMode
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
     private Commands cmds = new Commands(telemetry, this);
+    private Initialize init = new Initialize(telemetry);
 
     @Override
     public void runOpMode() throws InterruptedException
@@ -26,7 +39,8 @@ class SR_Auto_Beacon_with_Gryro_Drive extends LinearOpMode
 
         configs.loadParameters();
 
-        cmds.InitializeHW(robot);
+        ///cmds.InitializeHW(robot);
+        init.InitializeHW(robot);
 
         telemetry.addData("Config", "Configured for " + Configuration.ALLIANCE + " Alliance.");
         telemetry.addData("Config", "Configured for " + Configuration.START_POSITION + " Starting Position.");
@@ -62,7 +76,7 @@ class SR_Auto_Beacon_with_Gryro_Drive extends LinearOpMode
         }
         else
         {
-            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, 30, 0, 5.0);
+            cmds.GyroDrive(robot, Configuration.DRIVE_POWER, Configuration.SHORT_FIRST_BEACON_AIM_DIST, 0, 5.0);
         }
 
         //Turn to face beacon

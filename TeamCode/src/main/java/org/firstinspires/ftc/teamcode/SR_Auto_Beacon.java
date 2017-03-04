@@ -4,8 +4,20 @@ import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-/**
- * 2/12/2017 9019
+/*
+FUNCTION:
+    Autonomous: Uses encoders only
+
+    Steps:
+        <optional delay>
+        Drive within shooting distance
+        Shoot ball(s)
+        Drive to align with first beacon
+        Turn 45% to aim to beacon
+        Drive into beacon
+        <back up 3 inches>
+        <sense beacon, taking action, based on result>
+        Stop
  */
 
 @Autonomous(name="Beacon (Encoders)", group="Autonomous")
@@ -14,6 +26,7 @@ public class SR_Auto_Beacon extends LinearOpMode {
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
     private Commands cmds = new Commands(telemetry, this);
+    private Initialize init = new Initialize(telemetry);
 
     @Override
     public void runOpMode() throws InterruptedException
@@ -25,7 +38,8 @@ public class SR_Auto_Beacon extends LinearOpMode {
 
         configs.loadParameters();
 
-        cmds.InitializeHW(robot);
+        //cmds.InitializeHW(robot);
+        init.InitializeHW(robot);
 
         telemetry.addData("Config", "Configured for " + Configuration.ALLIANCE + " Alliance.");
         telemetry.addData("Config", "Configured for " + Configuration.START_POSITION + " Starting Position.");

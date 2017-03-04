@@ -6,7 +6,14 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 /*
 FUNCTION:
-    Autonomous
+    Autonomous: Uses gyro only
+
+    Steps:
+        <optional delay>
+        Drive within shooting distance
+        Shoot ball(s)
+        Drive to center park position
+        Stop
 */
 
 @Autonomous(name="Center Park (Gyro)", group="Autonomous")
@@ -16,6 +23,7 @@ public class SR_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
     private Commands cmds = new Commands(telemetry,this);
+    private Initialize init = new Initialize(telemetry);
 
     @Override
     public void runOpMode() throws InterruptedException
@@ -27,7 +35,8 @@ public class SR_Auto_Center_Park_with_Gyro_Drive extends LinearOpMode
 
         configs.loadParameters();
 
-        cmds.InitializeHW(robot);
+        //cmds.InitializeHW(robot);
+        init.InitializeHW(robot);
 
         telemetry.addData("Config", "Configured for " + Configuration.ALLIANCE + " Alliance.");
         telemetry.addData("Config", "Configured for " + Configuration.START_POSITION + " Starting Position.");

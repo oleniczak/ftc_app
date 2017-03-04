@@ -15,16 +15,13 @@ PURPOSE:
 public class Configuration
 {
     private Telemetry telemetry;
-
     private Properties properties = new Properties();
 
-    //InputStream in = null;
-
     //Defaults are being set within the configuration to ensure that if the configs fail to load,
-    //settings will still take place.  The configproperties.txt would/should override these defaults.
+    //settings will still take place.  The configproperties.txt will override these defaults.
 
     public static String ALLIANCE = "RED";
-    public static String START_POSITION = "LONG";
+    public static String START_POSITION = "SHORT";
 
     //*****************************************
     //Phone configurable settings:
@@ -38,6 +35,9 @@ public class Configuration
     //Servo Positions
         public static double CLOSED_LIFT_SERVO_POS = 1.0;
         public static double OPEN_LIFT_SERVO_POS = 0.4;
+
+        public static double CLOSED_TUSK_SERVO_POS = 1.0;
+        public static double OPEN_TUSK_SERVO_POS = 0.4;
 
     //Time Settings
         public static int AUTO_DELAY_TIME = 0;
@@ -54,9 +54,8 @@ public class Configuration
         public static double SHORT_FIRST_BEACON_DIST =20.0;
 
     //*****************************************
-    //Variables below are not available to be configured from phone
+    //Variables below are not available to be configured from phone (except for COUNTS_PER_INCH)
     //*****************************************
-
         public static double FORTYFIVE_DEGREE_TURN_INCHES = 10.0;
         public static double NINETY_DEGREE_TURN_INCHES = 20.0;
 
@@ -85,7 +84,6 @@ public class Configuration
             //* Keep for troubleshooting
             //System.out.println(System.getenv());
             //System.out.println(Environment.getExternalStorageDirectory());
-            //System.out.println(properties.getProperty("DRIVE_POWER"));
 
             // ** Requires configproperties.xt to reside in root of Phone/FIRST directory (next to 9019.xml file) **
             FileInputStream in = new FileInputStream("/storage/emulated/0/FIRST/configproperties.txt");
@@ -103,6 +101,9 @@ public class Configuration
             CLOSED_LIFT_SERVO_POS = Double.parseDouble(properties.getProperty("CLOSED_LIFT_SERVO_POS"));
             OPEN_LIFT_SERVO_POS = Double.parseDouble(properties.getProperty("OPEN_LIFT_SERVO_POS"));
 
+            CLOSED_TUSK_SERVO_POS = Double.parseDouble(properties.getProperty("CLOSED_TUSK_SERVO_POS"));
+            OPEN_TUSK_SERVO_POS = Double.parseDouble(properties.getProperty("OPEN_TUSK_SERVO_POS"));
+
             AUTO_DELAY_TIME = Integer.parseInt(properties.getProperty("AUTO_DELAY_TIME"));
             LAUNCH_TIME = Integer.parseInt(properties.getProperty("LAUNCH_TIME"));
 
@@ -112,9 +113,11 @@ public class Configuration
             SHORT_DIST_TO_PARK = Double.parseDouble(properties.getProperty("SHORT_DIST_TO_PARK"));
 
             LONG_FIRST_BEACON_AIM_DIST = Double.parseDouble(properties.getProperty("LONG_FIRST_BEACON_AIM_DIST"));
-//            SHORT_FIRST_BEACON_AIM_DIST = Double.parseDouble(properties.getProperty("SHORT_FIRST_BEACON_AIM_DIST"));
+            SHORT_FIRST_BEACON_AIM_DIST = Double.parseDouble(properties.getProperty("SHORT_FIRST_BEACON_AIM_DIST"));
             LONG_FIRST_BEACON_DIST = Double.parseDouble(properties.getProperty("LONG_FIRST_BEACON_DIST"));
-//            SHORT_FIRST_BEACON_DIST = Double.parseDouble(properties.getProperty("SHORT_FIRST_BEACON_DIST"));
+            SHORT_FIRST_BEACON_DIST = Double.parseDouble(properties.getProperty("SHORT_FIRST_BEACON_DIST"));
+
+            COUNTS_PER_INCH = Double.parseDouble(properties.getProperty("COUNTS_PER_INCH"));
 
             in.close();
         }

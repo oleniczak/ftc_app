@@ -16,6 +16,7 @@ public class TeleOpIterative extends OpMode
     private Hardware robot = new Hardware(telemetry);
     private Configuration configs = new Configuration(telemetry);
     //private Commands cmds = new Commands(telemetry, this);
+    private Initialize init = new Initialize(telemetry);
 
     private final ElapsedTime runtime = new ElapsedTime();
 
@@ -42,6 +43,7 @@ public class TeleOpIterative extends OpMode
         configs.loadParameters();
 
         //cmds.InitializeHW(robot);
+        init.InitializeHW(robot);
 
         //put this here to ensure encoders are disabled for teleop
         robot.motorFrontLeft.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -95,7 +97,7 @@ public class TeleOpIterative extends OpMode
 
             robot.motorCollect.setPower(Collect);
 
-            robot.motorLaunch.setPower(LaunchY);
+            //robot.motorLaunch.setPower(LaunchY);
 
             robot.motorLiftLeft.setPower(LiftY);
             robot.motorLiftRight.setPower(LiftY);
@@ -105,12 +107,15 @@ public class TeleOpIterative extends OpMode
         if (gamepad1.right_bumper)
         {
             robot.servoLift.setPosition(Configuration.OPEN_LIFT_SERVO_POS);
+            //robot.servoLift.setPosition(Configuration.OPEN_TUSK_SERVO_POS);
         }
         else
         {
             robot.servoLift.setPosition(Configuration.CLOSED_LIFT_SERVO_POS);
+            //robot.servoLift.setPosition(Configuration.CLOSED_TUSK_SERVO_POS);
         }
 
+        //Alternate driver
         if (gamepad2.b)
         {
             robot.sensorColor.enableLed(true);
@@ -118,6 +123,15 @@ public class TeleOpIterative extends OpMode
         else
         {
             robot.sensorColor.enableLed(false);
+        }
+
+        if (gamepad2.right_bumper)
+        {
+            robot.motorLaunch.setPower(Configuration.LAUNCH_POWER);
+        }
+        else
+        {
+            robot.motorLaunch.setPower(0);
         }
 
         //Alternate driver - servo controls

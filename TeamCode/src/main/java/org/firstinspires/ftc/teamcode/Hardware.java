@@ -2,13 +2,12 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cColorSensor;
 import com.qualcomm.hardware.modernrobotics.ModernRoboticsI2cGyro;
-import com.qualcomm.hardware.modernrobotics.ModernRoboticsUsbDeviceInterfaceModule;
+//import com.qualcomm.hardware.modernrobotics.ModernRoboticsUsbDeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.DeviceInterfaceModule;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.I2cAddr;
 import com.qualcomm.robotcore.hardware.Servo;
-//import com.qualcomm.robotcore.util.ElapsedTime;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 /*
@@ -18,7 +17,6 @@ PURPOSE:
 
 public class Hardware
 {
-    //private ElapsedTime runtime  = new ElapsedTime();
     private Telemetry telemetry;
     private HardwareMap hwMap = null;
 
@@ -37,6 +35,7 @@ public class Hardware
 
     //Servos
         Servo servoLift=null;
+        Servo servoTusk=null;
 
     //Sensors
         ModernRoboticsI2cGyro sensorGyro=null;
@@ -74,6 +73,7 @@ public class Hardware
 
         // Define Servos
             servoLift = hwMap.servo.get("fork");
+            //servoTusk = hwMap.servo.get("tusk");
 
         // Define Sensors
             sensorGyro = (ModernRoboticsI2cGyro) hwMap.gyroSensor.get("gyro");
